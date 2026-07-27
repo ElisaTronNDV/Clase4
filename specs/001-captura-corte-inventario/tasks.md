@@ -47,7 +47,7 @@ Aplicación web (ver `plan.md` § Project Structure): `backend/app/`, `backend/t
   `plan.md` § Project Structure
 - [X] T002 [P] Crear `backend/requirements.txt` con fastapi, uvicorn, sqlalchemy, pdfplumber,
   python-barcode, pyzbar, passlib[bcrypt], python-jose, python-multipart, pytest, httpx
-- [ ] T003 [P] Crear `backend/.env.example` con `SECRET_KEY` como variable obligatoria sin valor
+- [X] T003 [P] Crear `backend/.env.example` con `SECRET_KEY` como variable obligatoria sin valor
   por default, según `AGENTS.md`
 - [ ] T004 Crear proyecto Angular 18+ en `frontend/` con routing habilitado; agregar Bootstrap 5 y
   ZXing ngx-scanner como dependencias (`AGENTS.md` § Cómo correr)
