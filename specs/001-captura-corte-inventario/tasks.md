@@ -49,7 +49,7 @@ Aplicación web (ver `plan.md` § Project Structure): `backend/app/`, `backend/t
   python-barcode, pyzbar, passlib[bcrypt], python-jose, python-multipart, pytest, httpx
 - [X] T003 [P] Crear `backend/.env.example` con `SECRET_KEY` como variable obligatoria sin valor
   por default, según `AGENTS.md`
-- [ ] T004 Crear proyecto Angular 18+ en `frontend/` con routing habilitado; agregar Bootstrap 5 y
+- [X] T004 Crear proyecto Angular 18+ en `frontend/` con routing habilitado; agregar Bootstrap 5 y
   ZXing ngx-scanner como dependencias (`AGENTS.md` § Cómo correr)
 - [ ] T005 [P] Crear módulos de feature vacíos en `frontend/src/app/auth/`,
   `frontend/src/app/oficina/`, `frontend/src/app/taller/`, `frontend/src/app/inventario/`,

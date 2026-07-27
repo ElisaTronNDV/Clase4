@@ -1,0 +1,21 @@
+# Python / backend
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.egg-info/
+backend/.pytest_cache/
+*.pyc
+
+# Base de datos SQLite (no versionada, se crea vacía en el primer arranque)
+backend/*.db
+backend/*.db-journal
+
+# Variables de entorno (contienen SECRET_KEY)
+backend/.env
+.env
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
