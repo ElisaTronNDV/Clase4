@@ -51,7 +51,7 @@ Aplicación web (ver `plan.md` § Project Structure): `backend/app/`, `backend/t
   por default, según `AGENTS.md`
 - [X] T004 Crear proyecto Angular 18+ en `frontend/` con routing habilitado; agregar Bootstrap 5 y
   ZXing ngx-scanner como dependencias (`AGENTS.md` § Cómo correr)
-- [ ] T005 [P] Crear módulos de feature vacíos en `frontend/src/app/auth/`,
+- [X] T005 [P] Crear módulos de feature vacíos en `frontend/src/app/auth/`,
   `frontend/src/app/oficina/`, `frontend/src/app/taller/`, `frontend/src/app/inventario/`,
   `frontend/src/app/configuracion/`, `frontend/src/app/shared/`
 
