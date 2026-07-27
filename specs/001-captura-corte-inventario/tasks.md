@@ -41,7 +41,7 @@ Aplicación web (ver `plan.md` § Project Structure): `backend/app/`, `backend/t
 
 **Purpose**: Inicialización del proyecto backend y frontend.
 
-- [ ] T001 Crear estructura de directorios backend (`backend/app/core`, `backend/app/db`,
+- [X] T001 Crear estructura de directorios backend (`backend/app/core`, `backend/app/db`,
   `backend/app/models`, `backend/app/schemas`, `backend/app/services`, `backend/app/api`,
   `backend/tests/contract`, `backend/tests/integration`, `backend/tests/unit`) según
   `plan.md` § Project Structure
