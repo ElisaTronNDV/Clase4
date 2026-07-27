@@ -45,7 +45,7 @@ Aplicación web (ver `plan.md` § Project Structure): `backend/app/`, `backend/t
   `backend/app/models`, `backend/app/schemas`, `backend/app/services`, `backend/app/api`,
   `backend/tests/contract`, `backend/tests/integration`, `backend/tests/unit`) según
   `plan.md` § Project Structure
-- [ ] T002 [P] Crear `backend/requirements.txt` con fastapi, uvicorn, sqlalchemy, pdfplumber,
+- [X] T002 [P] Crear `backend/requirements.txt` con fastapi, uvicorn, sqlalchemy, pdfplumber,
   python-barcode, pyzbar, passlib[bcrypt], python-jose, python-multipart, pytest, httpx
 - [ ] T003 [P] Crear `backend/.env.example` con `SECRET_KEY` como variable obligatoria sin valor
   por default, según `AGENTS.md`
