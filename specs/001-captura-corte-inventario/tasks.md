@@ -177,7 +177,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T033 [P] [US2] Unit test de generación de código NEST (formato `NEST-######` derivado del id
   autoincremental, sin colisión bajo ids sucesivos) en
   `backend/tests/unit/test_nest_generation.py` — FR-012, `research.md` §10
-- [ ] T034 [P] [US2] Integration test del flujo completo de Historia 2 (subir PDF → editar
+- [X] T034 [P] [US2] Integration test del flujo completo de Historia 2 (subir PDF → editar
   propuesta → confirmar → NEST + stock comprometido) en
   `backend/tests/integration/test_oficina_flow.py`
 
