@@ -135,7 +135,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T024a [US1] Implementar acción de "Cerrar sesión" (`frontend/src/app/auth/logout/logout.component.ts`
   o botón equivalente en un layout compartido) que borra el token vía `auth-token.service` y
   redirige a `/login` (FR-006a) (depende de T021a)
-- [ ] T025 [US1] Aplicar `auth.guard` a las rutas `/oficina`, `/taller`, `/inventario`,
+- [X] T025 [US1] Aplicar `auth.guard` a las rutas `/oficina`, `/taller`, `/inventario`,
   `/configuracion` en `frontend/src/app/app.routes.ts` (depende de T011, T024)
 
 **Checkpoint**: User Story 1 funcional y testeable de forma independiente.
