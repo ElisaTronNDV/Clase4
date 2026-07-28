@@ -96,7 +96,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 
 ### Tests for User Story 1 (MANDATORY — write first, must fail before implementation) ⚠️
 
-- [ ] T014 [P] [US1] Contract test `POST /api/auth/registro` (incluye 409 email duplicado, 422
+- [X] T014 [P] [US1] Contract test `POST /api/auth/registro` (incluye 409 email duplicado, 422
   password con menos de 8 caracteres — FR-003, sin exigir mayúscula/número/símbolo) en
   `backend/tests/contract/test_auth_registro.py` — `contracts/auth.md`
 - [ ] T015 [P] [US1] Contract test `POST /api/auth/login` (incluye 401 credenciales inválidas, sin
