@@ -172,7 +172,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   `backend/tests/unit/test_pdf_extraction.py` — `research.md` §1-2
 - [X] T031 [P] [US2] Unit test de matching por tolerancia con desempate por menor Id en empate
   exacto en `backend/tests/unit/test_stock_matching.py` — FR-031, `research.md` §4
-- [ ] T032 [P] [US2] Unit test de actualización atómica de stock ante deltas concurrentes en
+- [X] T032 [P] [US2] Unit test de actualización atómica de stock ante deltas concurrentes en
   `backend/tests/unit/test_stock_atomic.py` — FR-032, `research.md` §3
 - [ ] T033 [P] [US2] Unit test de generación de código NEST (formato `NEST-######` derivado del id
   autoincremental, sin colisión bajo ids sucesivos) en
