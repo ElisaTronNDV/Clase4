@@ -73,7 +73,7 @@ implementarse.
   24 h, `research.md` §6, Principio IV) — FR-005, FR-006
 - [X] T009 Implementar `backend/app/main.py` — instancia FastAPI, registro de routers (placeholder),
   CORS, manejo global de errores (404/422/409/413/500 sin filtrar detalles internos)
-- [ ] T010 [P] Implementar `backend/app/models/configuracion_sistema.py` (tabla singleton) y
+- [X] T010 [P] Implementar `backend/app/models/configuracion_sistema.py` (tabla singleton) y
   evento de arranque que siembra la fila con `margen_tolerancia_mm=1.0` si no existe (FR-029)
 - [ ] T011 [P] Implementar `frontend/src/app/app.routes.ts` — esqueleto de rutas `/login`,
   `/oficina`, `/taller`, `/inventario`, `/configuracion` (sin guard todavía)

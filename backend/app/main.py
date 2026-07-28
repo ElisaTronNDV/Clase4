@@ -8,7 +8,8 @@ from fastapi.responses import JSONResponse
 
 from app.api import auth, configuracion, ordenes, productos
 from app.core.config import settings
-from app.db.session import Base, engine
+from app.db.session import Base, SessionLocal, engine
+from app.models.configuracion_sistema import seed_configuracion
 
 logger = logging.getLogger("dyp_lasercore")
 
@@ -16,6 +17,11 @@ logger = logging.getLogger("dyp_lasercore")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    try:
+        seed_configuracion(db)
+    finally:
+        db.close()
     yield
 
 
