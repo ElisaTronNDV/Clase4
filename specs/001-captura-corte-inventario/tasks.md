@@ -102,7 +102,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T015 [P] [US1] Contract test `POST /api/auth/login` (incluye 401 credenciales inválidas, sin
   bloqueo de cuenta tras múltiples intentos fallidos, JWT con `exp` a 24h) en
   `backend/tests/contract/test_auth_login.py` — `contracts/auth.md`
-- [ ] T016 [P] [US1] Integration test: acceso a una ruta protegida sin token → 401; con token
+- [X] T016 [P] [US1] Integration test: acceso a una ruta protegida sin token → 401; con token
   válido → acceso concedido a todos los módulos sin restricción de rol (FR-001, FR-002, FR-004) en
   `backend/tests/integration/test_auth_flow.py`
 
