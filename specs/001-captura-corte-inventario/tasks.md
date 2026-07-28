@@ -108,7 +108,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 
 ### Implementation for User Story 1
 
-- [ ] T017 [P] [US1] Crear modelo `Usuario` en `backend/app/models/usuario.py` (email unique,
+- [X] T017 [P] [US1] Crear modelo `Usuario` en `backend/app/models/usuario.py` (email unique,
   password_hash) — `data-model.md` § Usuario
 - [ ] T018 [P] [US1] Crear schemas pydantic `UsuarioCreate` (password `min_length=8`, sin otro
   requisito de composición), `UsuarioLogin`, `UsuarioOut`, `Token` en `backend/app/schemas/auth.py`
