@@ -121,7 +121,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T021 [US1] Implementar dependencia `get_current_user` en `backend/app/core/security.py`
   (401 ante token ausente/inválido/expirado), lista para usarse en todos los routers protegidos
   (FR-002, FR-004) (depende de T008)
-- [ ] T021a [P] [US1] Implementar `frontend/src/app/auth/auth-token.service.ts` — helper
+- [X] T021a [P] [US1] Implementar `frontend/src/app/auth/auth-token.service.ts` — helper
   compartido para guardar/leer/borrar el token de sesión persistido, usado por login, logout y el
   guard/interceptor (FR-006a)
 - [ ] T022 [P] [US1] Implementar `frontend/src/app/auth/login/login.component.ts` — formulario
