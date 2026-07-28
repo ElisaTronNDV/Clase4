@@ -157,7 +157,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   bloqueante; incluir aserción de que no se crea ninguna fila en
   `OrdenTrabajo`/`Pieza`/`RecorteDeclarado` tras la llamada, SC-006) en
   `backend/tests/contract/test_ordenes_extraer_pdf.py` — `contracts/ordenes.md`
-- [ ] T027 [P] [US2] Contract test `POST /api/ordenes` (compromiso de stock == multiplicidad,
+- [X] T027 [P] [US2] Contract test `POST /api/ordenes` (compromiso de stock == multiplicidad,
   formato de `codigo_nest` = `NEST-######`, advertencia de producto inexistente + alta automática,
   alerta de stock bajo, y rollback total —ninguna fila persiste— si la creación automática del
   producto falla, FR-015/`research.md` §11) en `backend/tests/contract/test_ordenes_crear.py` —
