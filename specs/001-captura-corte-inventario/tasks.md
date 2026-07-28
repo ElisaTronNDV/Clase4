@@ -124,7 +124,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T021a [P] [US1] Implementar `frontend/src/app/auth/auth-token.service.ts` — helper
   compartido para guardar/leer/borrar el token de sesión persistido, usado por login, logout y el
   guard/interceptor (FR-006a)
-- [ ] T022 [P] [US1] Implementar `frontend/src/app/auth/login/login.component.ts` — formulario
+- [X] T022 [P] [US1] Implementar `frontend/src/app/auth/login/login.component.ts` — formulario
   email/password, llama a `POST /auth/login`, persiste el token vía `auth-token.service` (depende
   de T021a)
 - [ ] T023 [P] [US1] Implementar `frontend/src/app/auth/registro/registro.component.ts` —

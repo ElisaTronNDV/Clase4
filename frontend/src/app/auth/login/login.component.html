@@ -1,0 +1,16 @@
+<div class="container py-5" style="max-width: 420px;">
+  <h1 class="h3 mb-4">Iniciar sesión</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input id="email" type="email" class="form-control" formControlName="email" />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input id="password" type="password" class="form-control" formControlName="password" />
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Ingresar</button>
+    <a routerLink="/registro" class="btn btn-link">Crear cuenta</a>
+  </form>
+</div>
