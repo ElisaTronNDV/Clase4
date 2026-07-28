@@ -79,7 +79,7 @@ implementarse.
   `/oficina`, `/taller`, `/inventario`, `/configuracion` (sin guard todavía)
 - [X] T012 [P] Implementar `frontend/src/app/shared/services/api.service.ts` — wrapper de
   `HttpClient` con URL base configurable
-- [ ] T013 Implementar `frontend/src/app/shared/interceptors/auth.interceptor.ts` — agrega el
+- [X] T013 Implementar `frontend/src/app/shared/interceptors/auth.interceptor.ts` — agrega el
   header `Authorization: Bearer <token>` a cada request y redirige a `/login` ante un 401 (FR-002)
 
 **Checkpoint**: Infraestructura lista — las historias de usuario pueden empezar (en paralelo, si
