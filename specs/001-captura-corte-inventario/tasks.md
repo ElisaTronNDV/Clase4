@@ -113,7 +113,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T018 [P] [US1] Crear schemas pydantic `UsuarioCreate` (password `min_length=8`, sin otro
   requisito de composición), `UsuarioLogin`, `UsuarioOut`, `Token` en `backend/app/schemas/auth.py`
   — `contracts/auth.md`, FR-003
-- [ ] T019 [US1] Implementar `POST /api/auth/registro` en `backend/app/api/auth.py` (hashea
+- [X] T019 [US1] Implementar `POST /api/auth/registro` en `backend/app/api/auth.py` (hashea
   password, rechaza email duplicado con 409) (depende de T017, T018, T008) — FR-003
 - [ ] T020 [US1] Implementar `POST /api/auth/login` en `backend/app/api/auth.py` (verifica
   password, emite JWT; sin mecanismo de bloqueo/rate limiting ante fallos repetidos — Clarifications
