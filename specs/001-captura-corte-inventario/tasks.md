@@ -115,7 +115,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
   — `contracts/auth.md`, FR-003
 - [X] T019 [US1] Implementar `POST /api/auth/registro` en `backend/app/api/auth.py` (hashea
   password, rechaza email duplicado con 409) (depende de T017, T018, T008) — FR-003
-- [ ] T020 [US1] Implementar `POST /api/auth/login` en `backend/app/api/auth.py` (verifica
+- [X] T020 [US1] Implementar `POST /api/auth/login` en `backend/app/api/auth.py` (verifica
   password, emite JWT; sin mecanismo de bloqueo/rate limiting ante fallos repetidos — Clarifications
   2026-07-22) (depende de T017, T018, T008) — FR-005
 - [ ] T021 [US1] Implementar dependencia `get_current_user` en `backend/app/core/security.py`
