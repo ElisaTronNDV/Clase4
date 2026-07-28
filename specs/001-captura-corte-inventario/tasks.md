@@ -68,7 +68,7 @@ implementarse.
   únicamente desde variables de entorno (Principio IV / RNF-05; nunca hardcodear secretos)
 - [X] T007 Implementar `backend/app/db/session.py` — engine y sesión SQLAlchemy sobre SQLite,
   `Base` declarativa, creación de la base vacía en el primer arranque
-- [ ] T008 [P] Implementar `backend/app/core/security.py` — `hash_password`/`verify_password`
+- [X] T008 [P] Implementar `backend/app/core/security.py` — `hash_password`/`verify_password`
   (passlib bcrypt) y `create_access_token`/`decode_access_token` (python-jose, JWT con `exp` a
   24 h, `research.md` §6, Principio IV) — FR-005, FR-006
 - [ ] T009 Implementar `backend/app/main.py` — instancia FastAPI, registro de routers (placeholder),
