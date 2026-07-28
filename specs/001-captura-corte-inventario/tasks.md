@@ -118,7 +118,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T020 [US1] Implementar `POST /api/auth/login` en `backend/app/api/auth.py` (verifica
   password, emite JWT; sin mecanismo de bloqueo/rate limiting ante fallos repetidos — Clarifications
   2026-07-22) (depende de T017, T018, T008) — FR-005
-- [ ] T021 [US1] Implementar dependencia `get_current_user` en `backend/app/core/security.py`
+- [X] T021 [US1] Implementar dependencia `get_current_user` en `backend/app/core/security.py`
   (401 ante token ausente/inválido/expirado), lista para usarse en todos los routers protegidos
   (FR-002, FR-004) (depende de T008)
 - [ ] T021a [P] [US1] Implementar `frontend/src/app/auth/auth-token.service.ts` — helper
