@@ -71,7 +71,7 @@ implementarse.
 - [X] T008 [P] Implementar `backend/app/core/security.py` — `hash_password`/`verify_password`
   (passlib bcrypt) y `create_access_token`/`decode_access_token` (python-jose, JWT con `exp` a
   24 h, `research.md` §6, Principio IV) — FR-005, FR-006
-- [ ] T009 Implementar `backend/app/main.py` — instancia FastAPI, registro de routers (placeholder),
+- [X] T009 Implementar `backend/app/main.py` — instancia FastAPI, registro de routers (placeholder),
   CORS, manejo global de errores (404/422/409/413/500 sin filtrar detalles internos)
 - [ ] T010 [P] Implementar `backend/app/models/configuracion_sistema.py` (tabla singleton) y
   evento de arranque que siembra la fila con `margen_tolerancia_mm=1.0` si no existe (FR-029)
