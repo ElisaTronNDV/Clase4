@@ -132,7 +132,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
   email duplicado
 - [X] T024 [US1] Implementar `frontend/src/app/auth/auth.guard.ts` — `CanActivate` que redirige a
   `/login` si no hay token válido (FR-002) (depende de T021a)
-- [ ] T024a [US1] Implementar acción de "Cerrar sesión" (`frontend/src/app/auth/logout/logout.component.ts`
+- [X] T024a [US1] Implementar acción de "Cerrar sesión" (`frontend/src/app/auth/logout/logout.component.ts`
   o botón equivalente en un layout compartido) que borra el token vía `auth-token.service` y
   redirige a `/login` (FR-006a) (depende de T021a)
 - [ ] T025 [US1] Aplicar `auth.guard` a las rutas `/oficina`, `/taller`, `/inventario`,

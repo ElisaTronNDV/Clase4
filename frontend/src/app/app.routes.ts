@@ -11,6 +11,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./auth/registro/registro.component').then((m) => m.RegistroComponent),
   },
+  {
+    path: 'logout',
+    loadComponent: () =>
+      import('./auth/logout/logout.component').then((m) => m.LogoutComponent),
+  },
   { path: 'oficina' },
   { path: 'taller' },
   { path: 'inventario' },
