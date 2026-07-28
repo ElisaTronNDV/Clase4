@@ -162,7 +162,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   alerta de stock bajo, y rollback total —ninguna fila persiste— si la creación automática del
   producto falla, FR-015/`research.md` §11) en `backend/tests/contract/test_ordenes_crear.py` —
   `contracts/ordenes.md`
-- [ ] T028 [P] [US2] Contract test `GET /api/ordenes` (filtro por estado + búsqueda parcial por
+- [X] T028 [P] [US2] Contract test `GET /api/ordenes` (filtro por estado + búsqueda parcial por
   NEST, combinables) en `backend/tests/contract/test_ordenes_listar.py` — FR-017
 - [ ] T029 [P] [US2] Contract test `GET /api/ordenes/{id}/codigo-barras` (la imagen debe decodificar
   con pyzbar antes de servirse) en `backend/tests/contract/test_ordenes_codigo_barras.py` —
