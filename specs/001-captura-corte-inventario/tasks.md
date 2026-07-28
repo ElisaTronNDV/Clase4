@@ -77,7 +77,7 @@ implementarse.
   evento de arranque que siembra la fila con `margen_tolerancia_mm=1.0` si no existe (FR-029)
 - [X] T011 [P] Implementar `frontend/src/app/app.routes.ts` — esqueleto de rutas `/login`,
   `/oficina`, `/taller`, `/inventario`, `/configuracion` (sin guard todavía)
-- [ ] T012 [P] Implementar `frontend/src/app/shared/services/api.service.ts` — wrapper de
+- [X] T012 [P] Implementar `frontend/src/app/shared/services/api.service.ts` — wrapper de
   `HttpClient` con URL base configurable
 - [ ] T013 Implementar `frontend/src/app/shared/interceptors/auth.interceptor.ts` — agrega el
   header `Authorization: Bearer <token>` a cada request y redirige a `/login` ante un 401 (FR-002)
