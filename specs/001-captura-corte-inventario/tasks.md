@@ -130,7 +130,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T023 [P] [US1] Implementar `frontend/src/app/auth/registro/registro.component.ts` —
   formulario de alta con validación de mínimo 8 caracteres en el password, maneja el error 409 de
   email duplicado
-- [ ] T024 [US1] Implementar `frontend/src/app/auth/auth.guard.ts` — `CanActivate` que redirige a
+- [X] T024 [US1] Implementar `frontend/src/app/auth/auth.guard.ts` — `CanActivate` que redirige a
   `/login` si no hay token válido (FR-002) (depende de T021a)
 - [ ] T024a [US1] Implementar acción de "Cerrar sesión" (`frontend/src/app/auth/logout/logout.component.ts`
   o botón equivalente en un layout compartido) que borra el token vía `auth-token.service` y
