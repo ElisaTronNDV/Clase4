@@ -167,7 +167,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T029 [P] [US2] Contract test `GET /api/ordenes/{id}/codigo-barras` (la imagen debe decodificar
   con pyzbar antes de servirse) en `backend/tests/contract/test_ordenes_codigo_barras.py` —
   FR-013, RNF-06
-- [ ] T030 [P] [US2] Unit test del servicio de extracción de PDF (tablas completas, tabla
+- [X] T030 [P] [US2] Unit test del servicio de extracción de PDF (tablas completas, tabla
   faltante, parseo de nombre técnico de recorte "800x400" y variantes con decimales/mayúsculas) en
   `backend/tests/unit/test_pdf_extraction.py` — `research.md` §1-2
 - [ ] T031 [P] [US2] Unit test de matching por tolerancia con desempate por menor Id en empate
