@@ -152,7 +152,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 
 ### Tests for User Story 2 (MANDATORY — write first, must fail before implementation) ⚠️
 
-- [ ] T026 [P] [US2] Contract test `POST /api/ordenes/extraer-pdf` (PDF inválido → 400; archivo de
+- [X] T026 [P] [US2] Contract test `POST /api/ordenes/extraer-pdf` (PDF inválido → 400; archivo de
   más de 20 MB → 413, FR-007; PDF con tabla faltante → `extraccion_incompleta: true`, nunca error
   bloqueante; incluir aserción de que no se crea ninguna fila en
   `OrdenTrabajo`/`Pieza`/`RecorteDeclarado` tras la llamada, SC-006) en
