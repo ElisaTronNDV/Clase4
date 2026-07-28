@@ -99,7 +99,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 - [X] T014 [P] [US1] Contract test `POST /api/auth/registro` (incluye 409 email duplicado, 422
   password con menos de 8 caracteres — FR-003, sin exigir mayúscula/número/símbolo) en
   `backend/tests/contract/test_auth_registro.py` — `contracts/auth.md`
-- [ ] T015 [P] [US1] Contract test `POST /api/auth/login` (incluye 401 credenciales inválidas, sin
+- [X] T015 [P] [US1] Contract test `POST /api/auth/login` (incluye 401 credenciales inválidas, sin
   bloqueo de cuenta tras múltiples intentos fallidos, JWT con `exp` a 24h) en
   `backend/tests/contract/test_auth_login.py` — `contracts/auth.md`
 - [ ] T016 [P] [US1] Integration test: acceso a una ruta protegida sin token → 401; con token
