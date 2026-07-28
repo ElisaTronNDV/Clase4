@@ -110,7 +110,7 @@ verificar que las rutas del sistema quedan bloqueadas sin sesión y accesibles c
 
 - [X] T017 [P] [US1] Crear modelo `Usuario` en `backend/app/models/usuario.py` (email unique,
   password_hash) — `data-model.md` § Usuario
-- [ ] T018 [P] [US1] Crear schemas pydantic `UsuarioCreate` (password `min_length=8`, sin otro
+- [X] T018 [P] [US1] Crear schemas pydantic `UsuarioCreate` (password `min_length=8`, sin otro
   requisito de composición), `UsuarioLogin`, `UsuarioOut`, `Token` en `backend/app/schemas/auth.py`
   — `contracts/auth.md`, FR-003
 - [ ] T019 [US1] Implementar `POST /api/auth/registro` en `backend/app/api/auth.py` (hashea
