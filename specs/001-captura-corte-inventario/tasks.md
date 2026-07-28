@@ -174,7 +174,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   exacto en `backend/tests/unit/test_stock_matching.py` — FR-031, `research.md` §4
 - [X] T032 [P] [US2] Unit test de actualización atómica de stock ante deltas concurrentes en
   `backend/tests/unit/test_stock_atomic.py` — FR-032, `research.md` §3
-- [ ] T033 [P] [US2] Unit test de generación de código NEST (formato `NEST-######` derivado del id
+- [X] T033 [P] [US2] Unit test de generación de código NEST (formato `NEST-######` derivado del id
   autoincremental, sin colisión bajo ids sucesivos) en
   `backend/tests/unit/test_nest_generation.py` — FR-012, `research.md` §10
 - [ ] T034 [P] [US2] Integration test del flujo completo de Historia 2 (subir PDF → editar
