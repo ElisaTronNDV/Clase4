@@ -185,7 +185,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 
 - [X] T035 [P] [US2] Crear modelo `Producto` en `backend/app/models/producto.py` —
   `data-model.md` § Producto
-- [ ] T036 [P] [US2] Crear modelo `OrdenTrabajo` en `backend/app/models/orden_trabajo.py`
+- [X] T036 [P] [US2] Crear modelo `OrdenTrabajo` en `backend/app/models/orden_trabajo.py`
   (`codigo_nest` string único, formato `NEST-######`) — `data-model.md` § OrdenTrabajo
 - [ ] T037 [P] [US2] Crear modelo `Pieza` en `backend/app/models/pieza.py` — `data-model.md` § Pieza
 - [ ] T038 [P] [US2] Crear modelo `RecorteDeclarado` en `backend/app/models/recorte_declarado.py`
