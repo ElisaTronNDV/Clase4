@@ -1,0 +1,26 @@
+import { Injectable, signal } from '@angular/core';
+
+import { Pieza } from '../shared/models/ordenes.models';
+
+export interface OrdenParaImprimir {
+  id: number;
+  codigo_nest: string;
+  piezas: Pieza[];
+}
+
+@Injectable({ providedIn: 'root' })
+export class OrdenConfirmadaService {
+  private readonly orden = signal<OrdenParaImprimir | null>(null);
+
+  set(orden: OrdenParaImprimir): void {
+    this.orden.set(orden);
+  }
+
+  get(): OrdenParaImprimir | null {
+    return this.orden();
+  }
+
+  clear(): void {
+    this.orden.set(null);
+  }
+}

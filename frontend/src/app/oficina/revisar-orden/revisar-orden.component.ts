@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { ApiService } from '../../shared/services/api.service';
 import { OrdenOut } from '../../shared/models/ordenes.models';
+import { OrdenConfirmadaService } from '../orden-confirmada.service';
 import { PropuestaEnEdicionService } from '../propuesta-en-edicion.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class RevisarOrdenComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly api = inject(ApiService);
   private readonly propuestaEnEdicion = inject(PropuestaEnEdicionService);
+  private readonly ordenConfirmada = inject(OrdenConfirmadaService);
   private readonly router = inject(Router);
 
   form = this.fb.group({
@@ -107,6 +109,11 @@ export class RevisarOrdenComponent implements OnInit {
     this.api.post<OrdenOut>('/api/ordenes', payload).subscribe({
       next: (orden) => {
         this.enviando = false;
+        this.ordenConfirmada.set({
+          id: orden.id,
+          codigo_nest: orden.codigo_nest,
+          piezas: this.piezas.getRawValue(),
+        });
         this.propuestaEnEdicion.clear();
         this.router.navigate(['/oficina/impresion', orden.id]);
       },

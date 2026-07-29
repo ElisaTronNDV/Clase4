@@ -1,0 +1,32 @@
+<div class="container py-4" style="max-width: 600px;" *ngIf="orden">
+  <div class="d-flex justify-content-between align-items-center mb-3 d-print-none">
+    <h1 class="h4 m-0">Orden {{ orden.codigo_nest }}</h1>
+    <button type="button" class="btn btn-primary" (click)="imprimir()">Imprimir</button>
+  </div>
+
+  <div class="alert alert-danger d-print-none" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="text-center mb-4">
+    <img
+      *ngIf="codigoBarrasUrl"
+      [src]="codigoBarrasUrl"
+      alt="Código de barras {{ orden.codigo_nest }}"
+    />
+    <p class="h5">{{ orden.codigo_nest }}</p>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pieza of orden.piezas">
+        <td>{{ pieza.descripcion }}</td>
+        <td>{{ pieza.cantidad }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

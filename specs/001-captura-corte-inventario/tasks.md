@@ -235,7 +235,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T051 [P] [US2] Implementar
   `frontend/src/app/oficina/listado-ordenes/listado-ordenes.component.ts` — listado con filtro de
   estado y búsqueda por NEST (FR-017)
-- [ ] T052 [US2] Implementar
+- [X] T052 [US2] Implementar
   `frontend/src/app/oficina/orden-impresion/orden-impresion.component.ts` — combina la imagen de
   código de barras (`GET /ordenes/{id}/codigo-barras`) con el detalle de piezas de la orden en una
   vista imprimible y expone una acción "Imprimir" (`window.print()`) (FR-013) (depende de T048,

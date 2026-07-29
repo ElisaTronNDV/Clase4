@@ -20,4 +20,8 @@ export class ApiService {
   put<T>(path: string, body: unknown) {
     return this.http.put<T>(`${this.baseUrl}${path}`, body);
   }
+
+  getBlob(path: string) {
+    return this.http.get(`${this.baseUrl}${path}`, { responseType: 'blob' });
+  }
 }
