@@ -51,7 +51,27 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'taller', canActivate: [authGuard] },
+  {
+    path: 'taller',
+    canActivate: [authGuard],
+    children: [
+      { path: '', redirectTo: 'escanear', pathMatch: 'full' },
+      {
+        path: 'escanear',
+        loadComponent: () =>
+          import('./taller/escanear-orden/escanear-orden.component').then(
+            (m) => m.EscanearOrdenComponent
+          ),
+      },
+      {
+        path: 'cerrar',
+        loadComponent: () =>
+          import('./taller/cerrar-orden/cerrar-orden.component').then(
+            (m) => m.CerrarOrdenComponent
+          ),
+      },
+    ],
+  },
   { path: 'inventario', canActivate: [authGuard] },
   { path: 'configuracion', canActivate: [authGuard] },
 ];

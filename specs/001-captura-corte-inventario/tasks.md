@@ -280,7 +280,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
 - [X] T060 [US3] Implementar `frontend/src/app/taller/cerrar-orden/cerrar-orden.component.ts` —
   muestra la orden encontrada, botón finalizar → `POST .../cerrar`, muestra error bloqueante sin
   reintento automático ante falla de conectividad (FR-021) (depende de T059)
-- [ ] T061 [US3] Registrar las rutas de Taller en `frontend/src/app/app.routes.ts`, protegidas por
+- [X] T061 [US3] Registrar las rutas de Taller en `frontend/src/app/app.routes.ts`, protegidas por
   `auth.guard` (depende de T025, T059, T060)
 
 **Checkpoint**: User Stories 1, 2 y 3 funcionan de forma independiente.
