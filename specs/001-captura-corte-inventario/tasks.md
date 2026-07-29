@@ -199,7 +199,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T041 [US2] Implementar actualización atómica de stock en `backend/app/services/stock.py`
   (función `aplicar_delta_stock`, un único `UPDATE ... SET col = col + :delta`, delta = multiplicidad
   para compromiso/descuento de chapa) — `research.md` §3 (hace pasar T032)
-- [ ] T042 [US2] Implementar generación de código NEST en `backend/app/services/ordenes.py`
+- [X] T042 [US2] Implementar generación de código NEST en `backend/app/services/ordenes.py`
   (función `generar_codigo_nest`, formato `f"NEST-{id:06d}"` a partir del id autoincremental de la
   fila recién insertada, sin consulta previa separada que pueda desincronizarse) — `research.md`
   §10 (hace pasar T033) — FR-012
