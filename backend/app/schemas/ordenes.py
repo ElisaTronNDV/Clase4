@@ -71,6 +71,11 @@ class OrdenListadoOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class OrdenDetalleOut(OrdenListadoOut):
+    piezas: list[PiezaSchema] = []
+    recortes: list[RecorteSchema] = []
+
+
 class AdvertenciaProductoInexistente(BaseModel):
     """Cuerpo del 404 cuando no hay producto coincidente y el usuario todavía no
     confirmó el alta automática (FR-015) — el cliente puede reenviar el mismo payload

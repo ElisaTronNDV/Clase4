@@ -12,10 +12,13 @@ from app.models.recorte_declarado import RecorteDeclarado
 from app.schemas.ordenes import (
     AdvertenciaProductoInexistente,
     OrdenCreate,
+    OrdenDetalleOut,
     OrdenListadoOut,
     OrdenOut,
+    PiezaSchema,
     ProductoComprometidoOut,
     PropuestaExtraccion,
+    RecorteSchema,
 )
 from app.services.barcode import GeneracionCodigoBarrasError, generar_codigo_barras_png
 from app.services.ordenes import generar_codigo_nest
@@ -154,6 +157,36 @@ def listar_ordenes(
     if nest:
         query = query.filter(OrdenTrabajo.codigo_nest.contains(nest))
     return query.order_by(OrdenTrabajo.id).all()
+
+
+@router.get("/buscar", response_model=OrdenDetalleOut)
+def buscar_orden(
+    codigo_nest: str,
+    usuario=Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> OrdenDetalleOut:
+    orden = db.query(OrdenTrabajo).filter(OrdenTrabajo.codigo_nest == codigo_nest).first()
+    if orden is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Orden inexistente")
+
+    piezas = db.query(Pieza).filter(Pieza.orden_id == orden.id).all()
+    recortes = db.query(RecorteDeclarado).filter(RecorteDeclarado.orden_id == orden.id).all()
+
+    return OrdenDetalleOut(
+        id=orden.id,
+        codigo_nest=orden.codigo_nest,
+        estado=orden.estado,
+        material=orden.material,
+        espesor_mm=orden.espesor_mm,
+        largo_mm=orden.largo_mm,
+        ancho_mm=orden.ancho_mm,
+        multiplicidad=orden.multiplicidad,
+        tiempo_ejecucion_estimado=orden.tiempo_ejecucion_estimado,
+        created_at=orden.created_at,
+        closed_at=orden.closed_at,
+        piezas=[PiezaSchema(descripcion=p.descripcion, cantidad=p.cantidad) for p in piezas],
+        recortes=[RecorteSchema(largo_mm=r.largo_mm, ancho_mm=r.ancho_mm) for r in recortes],
+    )
 
 
 @router.get("/{id_orden}/codigo-barras")

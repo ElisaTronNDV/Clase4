@@ -268,7 +268,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
 
 ### Implementation for User Story 3
 
-- [ ] T057 [US3] Implementar `GET /api/ordenes/buscar` en `backend/app/api/ordenes.py` (depende de
+- [X] T057 [US3] Implementar `GET /api/ordenes/buscar` en `backend/app/api/ordenes.py` (depende de
   T036)
 - [ ] T058 [US3] Implementar `POST /api/ordenes/{id}/cerrar` en `backend/app/api/ordenes.py`
   (descuenta stock vía `aplicar_delta_stock` T041, resuelve alta/incremento de recorte vía
