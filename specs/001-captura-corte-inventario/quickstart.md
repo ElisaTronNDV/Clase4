@@ -141,3 +141,10 @@ No se verificó manualmente en este pase: el rechazo de PDF > 20 MB (ya cubierto
 `test_ordenes_extraer_pdf.py`, T026) ni el renderizado real de la UI Angular (labels, badges,
 navegación) por la misma limitación de entorno — sí se validó con `ng build` (T081/T082).
 Script usado: descartable, no forma parte del repo (`scratchpad/quickstart/run_quickstart.py`).
+
+**SC-004 pendiente de verificación con hardware real** (`/speckit-analyze`, hallazgo C2): la
+decodificación del código de barras se verificó únicamente server-side con `pyzbar` (mismo lector
+que usa `GET /ordenes/{id}/codigo-barras` antes de servir la imagen, T029). No se verificó
+imprimiendo la orden físicamente y escaneándola con un lector óptico o la cámara de un celular,
+tal como pide SC-004 en su forma completa — queda pendiente para el primer ciclo de validación con
+hardware disponible, antes de considerar SC-004 100% cerrado para producción.
