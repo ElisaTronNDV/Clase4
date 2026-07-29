@@ -382,7 +382,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
   `specs/001-captura-corte-inventario/` — constitución § Flujo de Desarrollo y Calidad
 - [X] T081 [P] Revisar accesibilidad básica de los formularios (labels asociados, orden de foco,
   navegación por teclado) en `frontend/src/app/**/*.component.html`
-- [ ] T082 Ejecutar `pytest` y `ng test` completos y confirmar 0 fallos (gate de la constitución
+- [X] T082 Ejecutar `pytest` y `ng test` completos y confirmar 0 fallos (gate de la constitución
   antes de cerrar la feature)
 - [ ] T083 Ejecutar `quickstart.md` de punta a punta manualmente con un PDF real de
   `Archivos de Corte/`
