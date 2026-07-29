@@ -304,7 +304,7 @@ depender de ninguna orden de trabajo.
 - [X] T063 [P] [US4] Contract test `GET /api/productos` (incluye `alerta_stock_bajo: true` cuando
   `stock_fisico - stock_comprometido <= punto_pedido`, FR-016) en
   `backend/tests/contract/test_productos_listar.py` — FR-028
-- [ ] T064 [P] [US4] Contract test `PUT /api/productos/{id}` (stock_comprometido no editable, 409
+- [X] T064 [P] [US4] Contract test `PUT /api/productos/{id}` (stock_comprometido no editable, 409
   ante colisión exacta al editar material/espesor/dimensiones) en
   `backend/tests/contract/test_productos_editar.py` — FR-027
 
