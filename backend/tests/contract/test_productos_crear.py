@@ -25,6 +25,14 @@ def test_crear_producto_201(client, auth_headers, db_session):
     assert body["stock_comprometido"] == 0
 
 
+def test_crear_producto_asigna_id_secuencial(client, auth_headers, db_session):
+    resp1 = client.post("/api/productos", headers=auth_headers, json=_payload())
+    resp2 = client.post("/api/productos", headers=auth_headers, json=_payload(largo_mm=1300.0))
+    assert resp1.status_code == 201 and resp2.status_code == 201
+    id1, id2 = resp1.json()["id"], resp2.json()["id"]
+    assert id2 == id1 + 1
+
+
 def test_crear_producto_campo_faltante_422(client, auth_headers, db_session):
     payload = _payload()
     del payload["material"]
