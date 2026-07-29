@@ -348,7 +348,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
 
 ### Tests for User Story 5 (MANDATORY — write first, must fail before implementation) ⚠️
 
-- [ ] T073 [P] [US5] Contract test `GET /api/configuracion` (devuelve `1.0` por default) en
+- [X] T073 [P] [US5] Contract test `GET /api/configuracion` (devuelve `1.0` por default) en
   `backend/tests/contract/test_configuracion_get.py` — FR-029
 - [ ] T074 [P] [US5] Contract test `PUT /api/configuracion` (422 valor no positivo —cero o
   negativo—, sin límite superior explícito; un nuevo valor cambia el resultado de
