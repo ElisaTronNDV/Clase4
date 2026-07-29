@@ -11,6 +11,7 @@ from app.models.recorte_declarado import RecorteDeclarado
 from app.schemas.ordenes import (
     AdvertenciaProductoInexistente,
     OrdenCreate,
+    OrdenListadoOut,
     OrdenOut,
     ProductoComprometidoOut,
     PropuestaExtraccion,
@@ -136,3 +137,18 @@ def crear_orden(
         ),
         alerta_stock_bajo=alerta_stock_bajo,
     )
+
+
+@router.get("", response_model=list[OrdenListadoOut])
+def listar_ordenes(
+    estado: str | None = None,
+    nest: str | None = None,
+    usuario=Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> list[OrdenTrabajo]:
+    query = db.query(OrdenTrabajo)
+    if estado:
+        query = query.filter(OrdenTrabajo.estado == estado)
+    if nest:
+        query = query.filter(OrdenTrabajo.codigo_nest.contains(nest))
+    return query.order_by(OrdenTrabajo.id).all()

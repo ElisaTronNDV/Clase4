@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, Field
 
 
@@ -51,6 +53,22 @@ class OrdenOut(BaseModel):
     estado: str
     producto_comprometido: ProductoComprometidoOut
     alerta_stock_bajo: bool
+
+
+class OrdenListadoOut(BaseModel):
+    id: int
+    codigo_nest: str
+    estado: str
+    material: str
+    espesor_mm: float
+    largo_mm: float
+    ancho_mm: float
+    multiplicidad: int
+    tiempo_ejecucion_estimado: str
+    created_at: datetime
+    closed_at: datetime | None = None
+
+    model_config = {"from_attributes": True}
 
 
 class AdvertenciaProductoInexistente(BaseModel):

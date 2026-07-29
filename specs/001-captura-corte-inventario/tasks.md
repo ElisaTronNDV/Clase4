@@ -220,7 +220,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   usa T042 para `codigo_nest`, compromete stock en una cantidad igual a la multiplicidad (FR-012,
   FR-014), advertencia + alta automática si no hay coincidencia (FR-015), alerta de stock bajo
   (FR-016) (depende de T035-T038, T040, T041, T042, T044, T045)
-- [ ] T047 [US2] Implementar `GET /api/ordenes` (filtro estado + búsqueda NEST) en
+- [X] T047 [US2] Implementar `GET /api/ordenes` (filtro estado + búsqueda NEST) en
   `backend/app/api/ordenes.py` — FR-017 (depende de T036)
 - [ ] T048 [US2] Implementar `GET /api/ordenes/{id}/codigo-barras` en `backend/app/api/ordenes.py`
   (depende de T043, T046)
