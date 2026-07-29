@@ -366,7 +366,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
 - [X] T078 [P] [US5] Implementar
   `frontend/src/app/configuracion/margen-tolerancia/margen-tolerancia.component.ts` —
   mostrar/editar el margen (FR-029, FR-030)
-- [ ] T079 [US5] Registrar la ruta de Configuración en `frontend/src/app/app.routes.ts`, protegida
+- [X] T079 [US5] Registrar la ruta de Configuración en `frontend/src/app/app.routes.ts`, protegida
   por `auth.guard` (depende de T025, T078)
 
 **Checkpoint**: Las 5 historias de usuario funcionan de forma independiente.

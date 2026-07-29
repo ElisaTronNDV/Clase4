@@ -100,5 +100,12 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'configuracion', canActivate: [authGuard] },
+  {
+    path: 'configuracion',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./configuracion/margen-tolerancia/margen-tolerancia.component').then(
+        (m) => m.MargenToleranciaComponent
+      ),
+  },
 ];
