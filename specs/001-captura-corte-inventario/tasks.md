@@ -263,7 +263,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
   descuento de stock físico/comprometido == multiplicidad, alta de recorte sin coincidencia,
   incremento de recorte con coincidencia) en `backend/tests/contract/test_ordenes_cerrar.py` —
   FR-019 a FR-023
-- [ ] T056 [P] [US3] Integration test del flujo completo de Historia 3 (escanear → mostrar orden →
+- [X] T056 [P] [US3] Integration test del flujo completo de Historia 3 (escanear → mostrar orden →
   cerrar → verificar descuento y recortes) en `backend/tests/integration/test_taller_flow.py`
 
 ### Implementation for User Story 3
