@@ -213,7 +213,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T045 [US2] Implementar `POST /api/ordenes/extraer-pdf` en `backend/app/api/ordenes.py`
   (valida tamaño máximo 20 MB → 413 antes de parsear) (depende de T039, T044) — FR-007, FR-010,
   FR-011
-- [ ] T046 [US2] Implementar `POST /api/ordenes` en `backend/app/api/ordenes.py` como una única
+- [X] T046 [US2] Implementar `POST /api/ordenes` en `backend/app/api/ordenes.py` como una única
   transacción atómica (orden + piezas + recortes + compromiso de stock vía T040/T041 + alta
   automática de producto si corresponde): si cualquier paso falla —incluida la creación automática
   del producto— toda la transacción revierte y no se persiste nada (FR-015, `research.md` §11);
