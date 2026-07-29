@@ -350,7 +350,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
 
 - [X] T073 [P] [US5] Contract test `GET /api/configuracion` (devuelve `1.0` por default) en
   `backend/tests/contract/test_configuracion_get.py` — FR-029
-- [ ] T074 [P] [US5] Contract test `PUT /api/configuracion` (422 valor no positivo —cero o
+- [X] T074 [P] [US5] Contract test `PUT /api/configuracion` (422 valor no positivo —cero o
   negativo—, sin límite superior explícito; un nuevo valor cambia el resultado de
   `buscar_producto_coincidente` de US2/US3) en
   `backend/tests/contract/test_configuracion_put.py` — FR-030
