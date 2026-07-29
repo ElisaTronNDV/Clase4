@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 import { ApiService } from '../../shared/services/api.service';
 import { OrdenListado } from '../../shared/models/ordenes.models';
@@ -8,7 +9,7 @@ import { OrdenListado } from '../../shared/models/ordenes.models';
 @Component({
   selector: 'app-listado-ordenes',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './listado-ordenes.component.html',
 })
 export class ListadoOrdenesComponent implements OnInit {

@@ -1,5 +1,8 @@
 <div class="container py-4">
-  <h1 class="h4 mb-3">Órdenes de trabajo</h1>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 m-0">Órdenes de trabajo</h1>
+    <a routerLink="/oficina/subir" class="btn btn-primary">Subir archivo de corte</a>
+  </div>
 
   <form [formGroup]="filtros" (ngSubmit)="buscar()" class="row g-2 align-items-end mb-3">
     <div class="col-auto">

@@ -240,7 +240,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   código de barras (`GET /ordenes/{id}/codigo-barras`) con el detalle de piezas de la orden en una
   vista imprimible y expone una acción "Imprimir" (`window.print()`) (FR-013) (depende de T048,
   T050)
-- [ ] T053 [US2] Registrar las rutas de Oficina en `frontend/src/app/app.routes.ts`, protegidas por
+- [X] T053 [US2] Registrar las rutas de Oficina en `frontend/src/app/app.routes.ts`, protegidas por
   `auth.guard` (depende de T025, T049, T050, T051, T052)
 
 **Checkpoint**: User Stories 1 y 2 funcionan de forma independiente.
