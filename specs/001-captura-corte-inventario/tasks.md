@@ -323,7 +323,7 @@ depender de ninguna orden de trabajo.
 - [X] T069 [P] [US4] Implementar
   `frontend/src/app/inventario/alta-producto/alta-producto.component.ts` — formulario de alta con
   validación de campos obligatorios (FR-024)
-- [ ] T070 [P] [US4] Implementar
+- [X] T070 [P] [US4] Implementar
   `frontend/src/app/inventario/listado-productos/listado-productos.component.ts` — listado
   completo del maestro (FR-028) con badge/ícono de alerta junto al stock cuando
   `alerta_stock_bajo` es `true` (FR-016; este indicador aparece únicamente en este listado, no en

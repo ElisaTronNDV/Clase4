@@ -1,0 +1,51 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 m-0">Maestro de productos</h1>
+    <a routerLink="/inventario/alta" class="btn btn-primary">Nuevo producto</a>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <p *ngIf="cargando">Cargando…</p>
+
+  <table class="table table-striped" *ngIf="!cargando && productos.length > 0">
+    <thead>
+      <tr>
+        <th>Material</th>
+        <th>Espesor [mm]</th>
+        <th>Dimensiones [mm]</th>
+        <th>Stock físico</th>
+        <th>Stock comprometido</th>
+        <th>Punto de pedido</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.material }}</td>
+        <td>{{ producto.espesor_mm }}</td>
+        <td>{{ producto.largo_mm }} x {{ producto.ancho_mm }}</td>
+        <td>
+          {{ producto.stock_fisico }}
+          <span
+            class="badge text-bg-warning ms-1"
+            *ngIf="producto.alerta_stock_bajo"
+            title="Stock disponible en o por debajo del punto de pedido"
+          >
+            Stock bajo
+          </span>
+        </td>
+        <td>{{ producto.stock_comprometido }}</td>
+        <td>{{ producto.punto_pedido }}</td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="editar(producto)">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!cargando && productos.length === 0 && !errorMessage">
+    No hay productos cargados en el maestro.
+  </p>
+</div>
