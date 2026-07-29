@@ -196,7 +196,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T040 [US2] Implementar búsqueda de producto coincidente con tolerancia y desempate en
   `backend/app/services/stock.py` (función `buscar_producto_coincidente`) — `research.md` §4 (hace
   pasar T031)
-- [ ] T041 [US2] Implementar actualización atómica de stock en `backend/app/services/stock.py`
+- [X] T041 [US2] Implementar actualización atómica de stock en `backend/app/services/stock.py`
   (función `aplicar_delta_stock`, un único `UPDATE ... SET col = col + :delta`, delta = multiplicidad
   para compromiso/descuento de chapa) — `research.md` §3 (hace pasar T032)
 - [ ] T042 [US2] Implementar generación de código NEST en `backend/app/services/ordenes.py`

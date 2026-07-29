@@ -1,4 +1,4 @@
-from sqlalchemy import func, select
+from sqlalchemy import func, select, update
 from sqlalchemy.orm import Session
 
 from app.models.producto import Producto
@@ -30,3 +30,13 @@ def buscar_producto_coincidente(
         .limit(1)
     )
     return db.execute(stmt).scalars().first()
+
+
+def aplicar_delta_stock(db: Session, producto_id: int, campo: str, delta: float) -> None:
+    """Incrementa/decrementa `campo` (`stock_fisico` o `stock_comprometido`) con un único
+    UPDATE ... SET col = col + :delta, nunca un SELECT seguido de UPDATE con el valor
+    calculado en Python (research.md §3, FR-032). No commitea: queda a cargo del
+    llamador, que la compone dentro de su propia transacción atómica."""
+    columna = getattr(Producto, campo)
+    stmt = update(Producto).where(Producto.id == producto_id).values(**{campo: columna + delta})
+    db.execute(stmt)
