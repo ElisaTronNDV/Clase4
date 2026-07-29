@@ -363,7 +363,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
   (depende de T010, T075)
 - [X] T077 [US5] Implementar `PUT /api/configuracion` en `backend/app/api/configuracion.py`
   (depende de T076)
-- [ ] T078 [P] [US5] Implementar
+- [X] T078 [P] [US5] Implementar
   `frontend/src/app/configuracion/margen-tolerancia/margen-tolerancia.component.ts` —
   mostrar/editar el margen (FR-029, FR-030)
 - [ ] T079 [US5] Registrar la ruta de Configuración en `frontend/src/app/app.routes.ts`, protegida
