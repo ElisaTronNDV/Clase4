@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
+from fastapi.responses import Response
 from sqlalchemy.orm import Session
 
 from app.core.security import get_current_user
@@ -16,6 +17,7 @@ from app.schemas.ordenes import (
     ProductoComprometidoOut,
     PropuestaExtraccion,
 )
+from app.services.barcode import GeneracionCodigoBarrasError, generar_codigo_barras_png
 from app.services.ordenes import generar_codigo_nest
 from app.services.pdf_extraction import extraer_propuesta
 from app.services.stock import aplicar_delta_stock, buscar_producto_coincidente
@@ -152,3 +154,24 @@ def listar_ordenes(
     if nest:
         query = query.filter(OrdenTrabajo.codigo_nest.contains(nest))
     return query.order_by(OrdenTrabajo.id).all()
+
+
+@router.get("/{id_orden}/codigo-barras")
+def codigo_barras(
+    id_orden: int,
+    usuario=Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Response:
+    orden = db.get(OrdenTrabajo, id_orden)
+    if orden is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Orden inexistente")
+
+    try:
+        imagen_png = generar_codigo_barras_png(orden.codigo_nest)
+    except GeneracionCodigoBarrasError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="No se pudo generar un código de barras verificable",
+        ) from exc
+
+    return Response(content=imagen_png, media_type="image/png")
