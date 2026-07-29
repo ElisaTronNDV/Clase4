@@ -361,7 +361,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
   `> 0`, sin cota superior) en `backend/app/schemas/configuracion.py` — `contracts/configuracion.md`
 - [X] T076 [US5] Implementar `GET /api/configuracion` en `backend/app/api/configuracion.py`
   (depende de T010, T075)
-- [ ] T077 [US5] Implementar `PUT /api/configuracion` en `backend/app/api/configuracion.py`
+- [X] T077 [US5] Implementar `PUT /api/configuracion` en `backend/app/api/configuracion.py`
   (depende de T076)
 - [ ] T078 [P] [US5] Implementar
   `frontend/src/app/configuracion/margen-tolerancia/margen-tolerancia.component.ts` —
