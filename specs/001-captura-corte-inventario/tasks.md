@@ -357,7 +357,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
 
 ### Implementation for User Story 5
 
-- [ ] T075 [P] [US5] Crear schemas pydantic `ConfiguracionOut`, `ConfiguracionUpdate` (valida solo
+- [X] T075 [P] [US5] Crear schemas pydantic `ConfiguracionOut`, `ConfiguracionUpdate` (valida solo
   `> 0`, sin cota superior) en `backend/app/schemas/configuracion.py` — `contracts/configuracion.md`
 - [ ] T076 [US5] Implementar `GET /api/configuracion` en `backend/app/api/configuracion.py`
   (depende de T010, T075)
