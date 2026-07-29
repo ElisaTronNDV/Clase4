@@ -65,10 +65,6 @@ incompletas).
   `data-model.md` (§Producto, coincidencia por tolerancia). El delta de stock comprometido es
   igual a `multiplicidad` (una unidad de stock por chapa física consumida, ver Clarifications
   2026-07-22 en `spec.md`).
-- Si no hay coincidencia, `producto_comprometido` viene con `advertencia_producto_inexistente:
-  true` y un campo `confirmar_creacion_automatica` que el cliente puede reenviar en una segunda
-  llamada (o en la misma, según decisión de implementación) para aceptar la creación con stock
-  físico en 0 (FR-015).
 - `alerta_stock_bajo: true` si tras comprometer, `stock_fisico - stock_comprometido <=
   punto_pedido` del producto (FR-016) — informativo, no bloquea la respuesta 201; este flag solo
   alimenta el badge/ícono del listado de Inventario (`contracts/productos.md`), no se muestra en
@@ -79,9 +75,13 @@ incompletas).
   y no se persiste nada (FR-015, `research.md` §11) — el cliente recibe un error y puede reintentar
   con la misma propuesta ya revisada.
 
-**Response 404** (producto no encontrado y usuario no confirmó creación automática): ver detalle
-de flujo de advertencia arriba; no es necesariamente un error duro, es parte del flujo normal de
-FR-015.
+**Response 404** (producto no encontrado y usuario no confirmó creación automática): si no hay
+producto coincidente en el maestro y el cliente no envió `confirmar_creacion_automatica: true`, la
+respuesta es este 404 con
+`{"advertencia_producto_inexistente": true, "confirmar_creacion_automatica": false, "mensaje":
+"..."}`; el cliente reenvía la misma confirmación con `confirmar_creacion_automatica: true` para
+aceptar la creación automática (FR-015). No es necesariamente un error duro — es parte del flujo
+normal de FR-015, no del camino 201.
 
 **Response 500**: la creación automática de producto (u otro paso de la transacción) falló;
 rollback total, nada se persiste (FR-015, `research.md` §11).
