@@ -318,7 +318,7 @@ depender de ninguna orden de trabajo.
 - [X] T067 [US4] Implementar `GET /api/productos` en `backend/app/api/productos.py` — FR-028,
   calcula `alerta_stock_bajo` por producto (`stock_fisico - stock_comprometido <= punto_pedido`,
   FR-016) (depende de T035)
-- [ ] T068 [US4] Implementar `PUT /api/productos/{id}` en `backend/app/api/productos.py` (excluye
+- [X] T068 [US4] Implementar `PUT /api/productos/{id}` en `backend/app/api/productos.py` (excluye
   `stock_comprometido`, valida unicidad exacta al editar dimensiones, FR-027) (depende de T066)
 - [ ] T069 [P] [US4] Implementar
   `frontend/src/app/inventario/alta-producto/alta-producto.component.ts` — formulario de alta con

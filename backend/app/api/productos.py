@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from app.core.security import get_current_user
 from app.db.session import get_db
 from app.models.producto import Producto
-from app.schemas.productos import ProductoCreate, ProductoOut
+from app.schemas.productos import ProductoCreate, ProductoOut, ProductoUpdate
 
 router = APIRouter(prefix="/api/productos", tags=["productos"])
 
@@ -69,3 +69,36 @@ def listar_productos(
 ) -> list[ProductoOut]:
     productos = db.query(Producto).order_by(Producto.id).all()
     return [_a_producto_out(producto) for producto in productos]
+
+
+@router.put("/{id_producto}", response_model=ProductoOut)
+def editar_producto(
+    id_producto: int,
+    datos: ProductoUpdate,
+    usuario=Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ProductoOut:
+    producto = db.get(Producto, id_producto)
+    if producto is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Producto inexistente")
+
+    duplicado = (
+        db.query(Producto)
+        .filter(_dimensiones_exactas_filtro(datos), Producto.id != id_producto)
+        .first()
+    )
+    if duplicado is not None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Ya existe un producto con exactamente el mismo material, espesor y dimensiones",
+        )
+
+    producto.material = datos.material
+    producto.espesor_mm = datos.espesor_mm
+    producto.largo_mm = datos.largo_mm
+    producto.ancho_mm = datos.ancho_mm
+    producto.stock_fisico = datos.stock_fisico
+    producto.punto_pedido = datos.punto_pedido
+    db.commit()
+    db.refresh(producto)
+    return _a_producto_out(producto)
