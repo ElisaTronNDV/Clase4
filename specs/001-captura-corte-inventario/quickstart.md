@@ -116,3 +116,28 @@ T082 de `tasks.md`).
 
 Ver `.specify/memory/constitution.md` § "Flujo de Desarrollo y Calidad" para el criterio de
 cobertura por FR.
+
+## Verificación end-to-end ejecutada (T083, 2026-07-29)
+
+Se corrió el flujo completo de las 5 historias contra un backend real (`uvicorn`, DB SQLite
+temporal) usando `Archivos de Corte/Ejemplo 1.pdf`, vía llamadas HTTP directas (no a través de la
+UI Angular: no hay navegador/Chromium disponible en este entorno de desarrollo, ver nota en
+T082). Resultado: todos los pasos de Historia 1 a 5 pasaron, incluyendo:
+
+- Extracción real del PDF (`multiplicidad=1`, `espesor_mm=12.7`, `material=SAE_1010`,
+  `largo_mm=1310.0`, `ancho_mm=580.0`, 4 piezas, 0 recortes con dimensiones completas).
+- Edición manual de un valor extraído antes de confirmar (spec §US2-AC6).
+- Advertencia de producto inexistente + alta automática + `codigo_nest=NEST-000001` (FR-012,
+  FR-015).
+- Código de barras servido y verificado con pyzbar server-side (FR-013, RNF-06).
+- Cierre de la orden en Taller con descuento de stock físico/comprometido (FR-019, FR-020) y
+  rechazo del segundo cierre (409).
+- Alta manual, edición y listado del maestro de productos (FR-024 a FR-028), incluyendo el
+  rechazo por colisión exacta y el bloqueo de `stock_comprometido`.
+- Cambio del margen de tolerancia y su efecto inmediato en `buscar_producto_coincidente`
+  (FR-029, FR-030), y el 422 ante valor cero.
+
+No se verificó manualmente en este pase: el rechazo de PDF > 20 MB (ya cubierto por
+`test_ordenes_extraer_pdf.py`, T026) ni el renderizado real de la UI Angular (labels, badges,
+navegación) por la misma limitación de entorno — sí se validó con `ng build` (T081/T082).
+Script usado: descartable, no forma parte del repo (`scratchpad/quickstart/run_quickstart.py`).

@@ -384,7 +384,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
   navegación por teclado) en `frontend/src/app/**/*.component.html`
 - [X] T082 Ejecutar `pytest` y `ng test` completos y confirmar 0 fallos (gate de la constitución
   antes de cerrar la feature)
-- [ ] T083 Ejecutar `quickstart.md` de punta a punta manualmente con un PDF real de
+- [X] T083 Ejecutar `quickstart.md` de punta a punta manualmente con un PDF real de
   `Archivos de Corte/`
 - [ ] T084 [P] Revisar el manejo de excepciones no capturadas en `backend/app/main.py` (deben
   devolver 500 genérico sin filtrar detalles internos)
