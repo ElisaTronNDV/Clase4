@@ -227,7 +227,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T049 [P] [US2] Implementar `frontend/src/app/oficina/subir-pdf/subir-pdf.component.ts` —
   sube el PDF, llama a `extraer-pdf`, muestra la propuesta editable sin persistir nada (Principios
   II/III), maneja el error 413 de archivo mayor a 20 MB
-- [ ] T050 [US2] Implementar
+- [X] T050 [US2] Implementar
   `frontend/src/app/oficina/revisar-orden/revisar-orden.component.ts` — formulario editable de la
   propuesta (datos generales, piezas, recortes), botón confirmar → `POST /api/ordenes`; si la
   respuesta trae `advertencia_producto_inexistente`, muestra el aviso y un botón para reenviar la
