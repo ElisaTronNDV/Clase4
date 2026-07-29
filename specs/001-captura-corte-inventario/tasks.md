@@ -331,7 +331,7 @@ depender de ninguna orden de trabajo.
 - [X] T071 [US4] Implementar
   `frontend/src/app/inventario/editar-producto/editar-producto.component.ts` — formulario de
   edición con el campo de stock comprometido bloqueado (FR-027) (depende de T069)
-- [ ] T072 [US4] Registrar las rutas de Inventario en `frontend/src/app/app.routes.ts`, protegidas
+- [X] T072 [US4] Registrar las rutas de Inventario en `frontend/src/app/app.routes.ts`, protegidas
   por `auth.guard` (depende de T025, T069, T070, T071)
 
 **Checkpoint**: User Stories 1 a 4 funcionan de forma independiente.

@@ -72,6 +72,33 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'inventario', canActivate: [authGuard] },
+  {
+    path: 'inventario',
+    canActivate: [authGuard],
+    children: [
+      { path: '', redirectTo: 'listado', pathMatch: 'full' },
+      {
+        path: 'listado',
+        loadComponent: () =>
+          import('./inventario/listado-productos/listado-productos.component').then(
+            (m) => m.ListadoProductosComponent
+          ),
+      },
+      {
+        path: 'alta',
+        loadComponent: () =>
+          import('./inventario/alta-producto/alta-producto.component').then(
+            (m) => m.AltaProductoComponent
+          ),
+      },
+      {
+        path: 'editar/:id',
+        loadComponent: () =>
+          import('./inventario/editar-producto/editar-producto.component').then(
+            (m) => m.EditarProductoComponent
+          ),
+      },
+    ],
+  },
   { path: 'configuracion', canActivate: [authGuard] },
 ];
