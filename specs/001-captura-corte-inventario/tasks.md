@@ -328,7 +328,7 @@ depender de ninguna orden de trabajo.
   completo del maestro (FR-028) con badge/ícono de alerta junto al stock cuando
   `alerta_stock_bajo` es `true` (FR-016; este indicador aparece únicamente en este listado, no en
   Oficina)
-- [ ] T071 [US4] Implementar
+- [X] T071 [US4] Implementar
   `frontend/src/app/inventario/editar-producto/editar-producto.component.ts` — formulario de
   edición con el campo de stock comprometido bloqueado (FR-027) (depende de T069)
 - [ ] T072 [US4] Registrar las rutas de Inventario en `frontend/src/app/app.routes.ts`, protegidas
