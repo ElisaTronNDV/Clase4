@@ -10,28 +10,29 @@
       <legend class="h6">Datos generales</legend>
       <div class="row g-3">
         <div class="col-md-4">
-          <label class="form-label">Multiplicidad</label>
-          <input type="number" class="form-control" formControlName="multiplicidad" />
+          <label for="multiplicidad" class="form-label">Multiplicidad</label>
+          <input id="multiplicidad" type="number" class="form-control" formControlName="multiplicidad" />
         </div>
         <div class="col-md-4">
-          <label class="form-label">Espesor [mm]</label>
-          <input type="number" step="0.01" class="form-control" formControlName="espesor_mm" />
+          <label for="espesorMm" class="form-label">Espesor [mm]</label>
+          <input id="espesorMm" type="number" step="0.01" class="form-control" formControlName="espesor_mm" />
         </div>
         <div class="col-md-4">
-          <label class="form-label">Material</label>
-          <input type="text" class="form-control" formControlName="material" />
+          <label for="material" class="form-label">Material</label>
+          <input id="material" type="text" class="form-control" formControlName="material" />
         </div>
         <div class="col-md-4">
-          <label class="form-label">Largo [mm]</label>
-          <input type="number" step="0.01" class="form-control" formControlName="largo_mm" />
+          <label for="largoMm" class="form-label">Largo [mm]</label>
+          <input id="largoMm" type="number" step="0.01" class="form-control" formControlName="largo_mm" />
         </div>
         <div class="col-md-4">
-          <label class="form-label">Ancho [mm]</label>
-          <input type="number" step="0.01" class="form-control" formControlName="ancho_mm" />
+          <label for="anchoMm" class="form-label">Ancho [mm]</label>
+          <input id="anchoMm" type="number" step="0.01" class="form-control" formControlName="ancho_mm" />
         </div>
         <div class="col-md-4">
-          <label class="form-label">Tiempo de ejecución estimado</label>
+          <label for="tiempoEjecucion" class="form-label">Tiempo de ejecución estimado</label>
           <input
+            id="tiempoEjecucion"
             type="text"
             class="form-control"
             formControlName="tiempo_ejecucion_estimado"
@@ -55,6 +56,7 @@
               class="form-control"
               formControlName="descripcion"
               placeholder="Descripción"
+              [attr.aria-label]="'Descripción de la pieza ' + (i + 1)"
             />
           </div>
           <div class="col-3">
@@ -63,10 +65,16 @@
               class="form-control"
               formControlName="cantidad"
               placeholder="Cantidad"
+              [attr.aria-label]="'Cantidad de la pieza ' + (i + 1)"
             />
           </div>
           <div class="col-2">
-            <button type="button" class="btn btn-outline-danger btn-sm" (click)="eliminarPieza(i)">
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              [attr.aria-label]="'Quitar pieza ' + (i + 1)"
+              (click)="eliminarPieza(i)"
+            >
               Quitar
             </button>
           </div>
@@ -92,6 +100,7 @@
               class="form-control"
               formControlName="largo_mm"
               placeholder="Largo [mm]"
+              [attr.aria-label]="'Largo en mm del recorte ' + (i + 1)"
             />
           </div>
           <div class="col-5">
@@ -101,12 +110,14 @@
               class="form-control"
               formControlName="ancho_mm"
               placeholder="Ancho [mm]"
+              [attr.aria-label]="'Ancho en mm del recorte ' + (i + 1)"
             />
           </div>
           <div class="col-2">
             <button
               type="button"
               class="btn btn-outline-danger btn-sm"
+              [attr.aria-label]="'Quitar recorte ' + (i + 1)"
               (click)="eliminarRecorte(i)"
             >
               Quitar

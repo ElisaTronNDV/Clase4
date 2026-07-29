@@ -6,16 +6,17 @@
 
   <form [formGroup]="filtros" (ngSubmit)="buscar()" class="row g-2 align-items-end mb-3">
     <div class="col-auto">
-      <label class="form-label">Estado</label>
-      <select class="form-select" formControlName="estado">
+      <label for="filtroEstado" class="form-label">Estado</label>
+      <select id="filtroEstado" class="form-select" formControlName="estado">
         <option value="">Todos</option>
         <option value="vigente">Vigente</option>
         <option value="cerrada">Cerrada</option>
       </select>
     </div>
     <div class="col-auto">
-      <label class="form-label">Código NEST</label>
+      <label for="filtroNest" class="form-label">Código NEST</label>
       <input
+        id="filtroNest"
         type="text"
         class="form-control"
         formControlName="nest"

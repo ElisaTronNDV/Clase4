@@ -37,7 +37,12 @@
         <td>{{ producto.stock_comprometido }}</td>
         <td>{{ producto.punto_pedido }}</td>
         <td>
-          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="editar(producto)">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            [attr.aria-label]="'Editar producto ' + producto.material"
+            (click)="editar(producto)"
+          >
             Editar
           </button>
         </td>
