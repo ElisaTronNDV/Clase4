@@ -386,7 +386,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
   antes de cerrar la feature)
 - [X] T083 Ejecutar `quickstart.md` de punta a punta manualmente con un PDF real de
   `Archivos de Corte/`
-- [ ] T084 [P] Revisar el manejo de excepciones no capturadas en `backend/app/main.py` (deben
+- [X] T084 [P] Revisar el manejo de excepciones no capturadas en `backend/app/main.py` (deben
   devolver 500 genérico sin filtrar detalles internos)
 - [ ] T085 [P] Medir accuracy de extracción **por campo individual** (≥98%, SC-001, metodología
   fijada en Clarifications 2026-07-22) y latencia de extracción/listados (SC-002 <10s, SC-003 <2s
