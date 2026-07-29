@@ -1,0 +1,61 @@
+<div class="container py-4">
+  <h1 class="h4 mb-3">Órdenes de trabajo</h1>
+
+  <form [formGroup]="filtros" (ngSubmit)="buscar()" class="row g-2 align-items-end mb-3">
+    <div class="col-auto">
+      <label class="form-label">Estado</label>
+      <select class="form-select" formControlName="estado">
+        <option value="">Todos</option>
+        <option value="vigente">Vigente</option>
+        <option value="cerrada">Cerrada</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <label class="form-label">Código NEST</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nest"
+        placeholder="Ej. 000042"
+      />
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-secondary" (click)="limpiarFiltros()">
+        Limpiar filtros
+      </button>
+    </div>
+  </form>
+
+  <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <p *ngIf="cargando">Cargando…</p>
+
+  <table class="table table-striped" *ngIf="!cargando && ordenes.length > 0">
+    <thead>
+      <tr>
+        <th>NEST</th>
+        <th>Estado</th>
+        <th>Material</th>
+        <th>Dimensiones [mm]</th>
+        <th>Multiplicidad</th>
+        <th>Tiempo estimado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orden of ordenes">
+        <td>{{ orden.codigo_nest }}</td>
+        <td>{{ orden.estado }}</td>
+        <td>{{ orden.material }}</td>
+        <td>{{ orden.largo_mm }} x {{ orden.ancho_mm }}</td>
+        <td>{{ orden.multiplicidad }}</td>
+        <td>{{ orden.tiempo_ejecucion_estimado }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!cargando && ordenes.length === 0 && !errorMessage">
+    No hay órdenes que coincidan con los filtros aplicados.
+  </p>
+</div>

@@ -232,7 +232,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   propuesta (datos generales, piezas, recortes), botón confirmar → `POST /api/ordenes`; si la
   respuesta trae `advertencia_producto_inexistente`, muestra el aviso y un botón para reenviar la
   confirmación con `confirmar_creacion_automatica` (FR-015) (depende de T046, T049)
-- [ ] T051 [P] [US2] Implementar
+- [X] T051 [P] [US2] Implementar
   `frontend/src/app/oficina/listado-ordenes/listado-ordenes.component.ts` — listado con filtro de
   estado y búsqueda por NEST (FR-017)
 - [ ] T052 [US2] Implementar
