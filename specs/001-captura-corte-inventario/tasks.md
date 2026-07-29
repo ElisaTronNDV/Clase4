@@ -310,7 +310,7 @@ depender de ninguna orden de trabajo.
 
 ### Implementation for User Story 4
 
-- [ ] T065 [P] [US4] Crear schemas pydantic `ProductoCreate`, `ProductoOut` (incluye
+- [X] T065 [P] [US4] Crear schemas pydantic `ProductoCreate`, `ProductoOut` (incluye
   `alerta_stock_bajo`), `ProductoUpdate` en `backend/app/schemas/productos.py` —
   `contracts/productos.md`
 - [ ] T066 [US4] Implementar `POST /api/productos` en `backend/app/api/productos.py` (valida
