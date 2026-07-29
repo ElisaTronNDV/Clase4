@@ -388,7 +388,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
   `Archivos de Corte/`
 - [X] T084 [P] Revisar el manejo de excepciones no capturadas en `backend/app/main.py` (deben
   devolver 500 genérico sin filtrar detalles internos)
-- [ ] T085 [P] Medir accuracy de extracción **por campo individual** (≥98%, SC-001, metodología
+- [X] T085 [P] Medir accuracy de extracción **por campo individual** (≥98%, SC-001, metodología
   fijada en Clarifications 2026-07-22) y latencia de extracción/listados (SC-002 <10s, SC-003 <2s
   p95) contra una muestra de PDFs de `Archivos de Corte/` en
   `backend/tests/performance/test_metrics.py`
