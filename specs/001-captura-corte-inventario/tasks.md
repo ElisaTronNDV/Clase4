@@ -257,7 +257,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
 
 ### Tests for User Story 3 (MANDATORY — write first, must fail before implementation) ⚠️
 
-- [ ] T054 [P] [US3] Contract test `GET /api/ordenes/buscar?codigo_nest=` (incluye 404 código
+- [X] T054 [P] [US3] Contract test `GET /api/ordenes/buscar?codigo_nest=` (incluye 404 código
   inexistente) en `backend/tests/contract/test_ordenes_buscar.py` — FR-018
 - [ ] T055 [P] [US3] Contract test `POST /api/ordenes/{id}/cerrar` (incluye 409 orden ya cerrada,
   descuento de stock físico/comprometido == multiplicidad, alta de recorte sin coincidencia,
