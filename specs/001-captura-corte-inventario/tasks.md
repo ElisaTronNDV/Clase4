@@ -193,7 +193,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T039 [US2] Implementar servicio de extracción de PDF en
   `backend/app/services/pdf_extraction.py` (pdfplumber `extract_tables` + regex acotado para
   recortes) — `research.md` §1-2 (hace pasar T030) — FR-008, FR-009
-- [ ] T040 [US2] Implementar búsqueda de producto coincidente con tolerancia y desempate en
+- [X] T040 [US2] Implementar búsqueda de producto coincidente con tolerancia y desempate en
   `backend/app/services/stock.py` (función `buscar_producto_coincidente`) — `research.md` §4 (hace
   pasar T031)
 - [ ] T041 [US2] Implementar actualización atómica de stock en `backend/app/services/stock.py`
