@@ -270,7 +270,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
 
 - [X] T057 [US3] Implementar `GET /api/ordenes/buscar` en `backend/app/api/ordenes.py` (depende de
   T036)
-- [ ] T058 [US3] Implementar `POST /api/ordenes/{id}/cerrar` en `backend/app/api/ordenes.py`
+- [X] T058 [US3] Implementar `POST /api/ordenes/{id}/cerrar` en `backend/app/api/ordenes.py`
   (descuenta stock vía `aplicar_delta_stock` T041, resuelve alta/incremento de recorte vía
   `buscar_producto_coincidente` T040) (depende de T040, T041, T057) — FR-020, FR-022, FR-023
 - [ ] T059 [P] [US3] Implementar

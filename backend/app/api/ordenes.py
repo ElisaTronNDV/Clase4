@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
 from fastapi.responses import Response
 from sqlalchemy.orm import Session
@@ -11,6 +13,7 @@ from app.models.producto import Producto
 from app.models.recorte_declarado import RecorteDeclarado
 from app.schemas.ordenes import (
     AdvertenciaProductoInexistente,
+    OrdenCerradaOut,
     OrdenCreate,
     OrdenDetalleOut,
     OrdenListadoOut,
@@ -208,3 +211,68 @@ def codigo_barras(
         ) from exc
 
     return Response(content=imagen_png, media_type="image/png")
+
+
+@router.post("/{id_orden}/cerrar", response_model=OrdenCerradaOut)
+def cerrar_orden(
+    id_orden: int,
+    usuario=Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> OrdenCerradaOut:
+    orden = db.get(OrdenTrabajo, id_orden)
+    if orden is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Orden inexistente")
+    if orden.estado == "cerrada":
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="La orden ya está cerrada"
+        )
+
+    margen_tolerancia_mm = _obtener_margen_tolerancia_mm(db)
+
+    try:
+        aplicar_delta_stock(
+            db, orden.producto_comprometido_id, "stock_fisico", -float(orden.multiplicidad)
+        )
+        aplicar_delta_stock(
+            db, orden.producto_comprometido_id, "stock_comprometido", -float(orden.multiplicidad)
+        )
+
+        recortes = db.query(RecorteDeclarado).filter(RecorteDeclarado.orden_id == orden.id).all()
+        for recorte in recortes:
+            producto_recorte = buscar_producto_coincidente(
+                db,
+                material=orden.material,
+                espesor_mm=orden.espesor_mm,
+                largo_mm=recorte.largo_mm,
+                ancho_mm=recorte.ancho_mm,
+                margen_tolerancia_mm=margen_tolerancia_mm,
+            )
+            if producto_recorte is None:
+                producto_recorte = Producto(
+                    material=orden.material,
+                    espesor_mm=orden.espesor_mm,
+                    largo_mm=recorte.largo_mm,
+                    ancho_mm=recorte.ancho_mm,
+                    stock_fisico=1,
+                    stock_comprometido=0,
+                    punto_pedido=0,
+                )
+                db.add(producto_recorte)
+                db.flush()
+            else:
+                aplicar_delta_stock(db, producto_recorte.id, "stock_fisico", 1.0)
+
+            recorte.producto_resultante_id = producto_recorte.id
+
+        orden.estado = "cerrada"
+        orden.closed_at = datetime.now(timezone.utc)
+        db.commit()
+    except Exception as exc:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="No se pudo cerrar la orden: la operación se revirtió por completo",
+        ) from exc
+
+    db.refresh(orden)
+    return OrdenCerradaOut(id=orden.id, estado=orden.estado, closed_at=orden.closed_at)

@@ -76,6 +76,12 @@ class OrdenDetalleOut(OrdenListadoOut):
     recortes: list[RecorteSchema] = []
 
 
+class OrdenCerradaOut(BaseModel):
+    id: int
+    estado: str
+    closed_at: datetime
+
+
 class AdvertenciaProductoInexistente(BaseModel):
     """Cuerpo del 404 cuando no hay producto coincidente y el usuario todavía no
     confirmó el alta automática (FR-015) — el cliente puede reenviar el mismo payload
