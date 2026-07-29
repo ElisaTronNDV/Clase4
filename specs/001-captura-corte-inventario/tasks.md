@@ -320,7 +320,7 @@ depender de ninguna orden de trabajo.
   FR-016) (depende de T035)
 - [X] T068 [US4] Implementar `PUT /api/productos/{id}` en `backend/app/api/productos.py` (excluye
   `stock_comprometido`, valida unicidad exacta al editar dimensiones, FR-027) (depende de T066)
-- [ ] T069 [P] [US4] Implementar
+- [X] T069 [P] [US4] Implementar
   `frontend/src/app/inventario/alta-producto/alta-producto.component.ts` — formulario de alta con
   validación de campos obligatorios (FR-024)
 - [ ] T070 [P] [US4] Implementar
