@@ -377,7 +377,7 @@ coincidencia (Historia 2 o 3) usa el nuevo valor configurado.
 
 **Purpose**: Mejoras que afectan a varias historias de usuario, previas al cierre de la feature.
 
-- [ ] T080 [P] Documentar el mapa FR → test (qué archivo de test cubre cada FR-001..FR-032,
+- [X] T080 [P] Documentar el mapa FR → test (qué archivo de test cubre cada FR-001..FR-032,
   incluidas las clarificaciones de las sesiones 2026-07-21 y 2026-07-22) en
   `specs/001-captura-corte-inventario/` — constitución § Flujo de Desarrollo y Calidad
 - [ ] T081 [P] Revisar accesibilidad básica de los formularios (labels asociados, orden de foco,
