@@ -273,7 +273,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
 - [X] T058 [US3] Implementar `POST /api/ordenes/{id}/cerrar` en `backend/app/api/ordenes.py`
   (descuenta stock vía `aplicar_delta_stock` T041, resuelve alta/incremento de recorte vía
   `buscar_producto_coincidente` T040) (depende de T040, T041, T057) — FR-020, FR-022, FR-023
-- [ ] T059 [P] [US3] Implementar
+- [X] T059 [P] [US3] Implementar
   `frontend/src/app/taller/escanear-orden/escanear-orden.component.ts` — integra ngx-scanner
   configurado explícitamente con `formats: [CODE_128]` (constitución) + input manual de NEST
   (FR-018)

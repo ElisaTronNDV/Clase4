@@ -46,3 +46,14 @@ export interface OrdenListado {
   created_at: string;
   closed_at: string | null;
 }
+
+export interface OrdenDetalle extends OrdenListado {
+  piezas: Pieza[];
+  recortes: Recorte[];
+}
+
+export interface OrdenCerrada {
+  id: number;
+  estado: string;
+  closed_at: string;
+}
