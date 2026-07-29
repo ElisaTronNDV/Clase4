@@ -315,7 +315,7 @@ depender de ninguna orden de trabajo.
   `contracts/productos.md`
 - [X] T066 [US4] Implementar `POST /api/productos` en `backend/app/api/productos.py` (valida
   unicidad exacta, FR-026) (depende de T035, T065)
-- [ ] T067 [US4] Implementar `GET /api/productos` en `backend/app/api/productos.py` — FR-028,
+- [X] T067 [US4] Implementar `GET /api/productos` en `backend/app/api/productos.py` — FR-028,
   calcula `alerta_stock_bajo` por producto (`stock_fisico - stock_comprometido <= punto_pedido`,
   FR-016) (depende de T035)
 - [ ] T068 [US4] Implementar `PUT /api/productos/{id}` en `backend/app/api/productos.py` (excluye

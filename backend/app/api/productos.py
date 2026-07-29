@@ -60,3 +60,12 @@ def crear_producto(
     db.commit()
     db.refresh(producto)
     return _a_producto_out(producto)
+
+
+@router.get("", response_model=list[ProductoOut])
+def listar_productos(
+    usuario=Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> list[ProductoOut]:
+    productos = db.query(Producto).order_by(Producto.id).all()
+    return [_a_producto_out(producto) for producto in productos]
