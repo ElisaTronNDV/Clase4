@@ -206,7 +206,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
 - [X] T043 [P] [US2] Implementar servicio de generación y verificación de código de barras en
   `backend/app/services/barcode.py` (python-barcode CODE_128, `module_width >= 0.33mm`,
   verificación con pyzbar antes de servir) — `research.md` §5
-- [ ] T044 [P] [US2] Crear schemas pydantic `PropuestaExtraccion`, `OrdenCreate`, `OrdenOut`
+- [X] T044 [P] [US2] Crear schemas pydantic `PropuestaExtraccion`, `OrdenCreate`, `OrdenOut`
   (incluye `alerta_stock_bajo`, `advertencia_producto_inexistente`,
   `confirmar_creacion_automatica`), `PiezaSchema`, `RecorteSchema` en
   `backend/app/schemas/ordenes.py` — `contracts/ordenes.md` — FR-010, FR-011
