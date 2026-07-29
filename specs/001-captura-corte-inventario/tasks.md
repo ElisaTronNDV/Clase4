@@ -259,7 +259,7 @@ se muestra, finalizarla y comprobar el descuento de stock y el alta/incremento d
 
 - [X] T054 [P] [US3] Contract test `GET /api/ordenes/buscar?codigo_nest=` (incluye 404 código
   inexistente) en `backend/tests/contract/test_ordenes_buscar.py` — FR-018
-- [ ] T055 [P] [US3] Contract test `POST /api/ordenes/{id}/cerrar` (incluye 409 orden ya cerrada,
+- [X] T055 [P] [US3] Contract test `POST /api/ordenes/{id}/cerrar` (incluye 409 orden ya cerrada,
   descuento de stock físico/comprometido == multiplicidad, alta de recorte sin coincidencia,
   incremento de recorte con coincidencia) en `backend/tests/contract/test_ordenes_cerrar.py` —
   FR-019 a FR-023
