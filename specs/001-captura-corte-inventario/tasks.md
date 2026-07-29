@@ -203,7 +203,7 @@ verificar NEST generado, orden "vigente" y stock comprometido según multiplicid
   (función `generar_codigo_nest`, formato `f"NEST-{id:06d}"` a partir del id autoincremental de la
   fila recién insertada, sin consulta previa separada que pueda desincronizarse) — `research.md`
   §10 (hace pasar T033) — FR-012
-- [ ] T043 [P] [US2] Implementar servicio de generación y verificación de código de barras en
+- [X] T043 [P] [US2] Implementar servicio de generación y verificación de código de barras en
   `backend/app/services/barcode.py` (python-barcode CODE_128, `module_width >= 0.33mm`,
   verificación con pyzbar antes de servir) — `research.md` §5
 - [ ] T044 [P] [US2] Crear schemas pydantic `PropuestaExtraccion`, `OrdenCreate`, `OrdenOut`
