@@ -298,7 +298,7 @@ depender de ninguna orden de trabajo.
 
 ### Tests for User Story 4 (MANDATORY — write first, must fail before implementation) ⚠️
 
-- [ ] T062 [P] [US4] Contract test `POST /api/productos` (incluye 422 campo obligatorio faltante,
+- [X] T062 [P] [US4] Contract test `POST /api/productos` (incluye 422 campo obligatorio faltante,
   409 duplicado exacto) en `backend/tests/contract/test_productos_crear.py` — FR-024, FR-025,
   FR-026
 - [ ] T063 [P] [US4] Contract test `GET /api/productos` (incluye `alerta_stock_bajo: true` cuando
