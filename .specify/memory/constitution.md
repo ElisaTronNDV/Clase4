@@ -19,6 +19,17 @@ Templates requiring updates:
     changed to mandatory, matching the red-green-refactor workflow
   - .claude/skills/speckit-constitution (this file): n/a, self-referential
 Follow-up TODOs: none
+
+---
+Version change: 1.0.0 → 1.0.1 (PATCH — aclaración sin cambio de sentido)
+Modified principles: n/a
+Added sections:
+  - Governance: nota de equivalencia de numeración RF-XX/RNF-XX (PRD) ↔ FR-XXX/SC-XXX
+    (spec.md), para trazabilidad entre esta constitución y specs/001-captura-corte-inventario/.
+    Originado en /speckit-analyze (hallazgo I1) al cerrar la feature 001.
+Removed sections: none
+Templates requiring updates: ninguna (no cambia ningún principio ni gate)
+Follow-up TODOs: none
 -->
 
 # DyP LaserCore Constitution
@@ -130,5 +141,11 @@ por igual.
 - `AGENTS.md` (y `CLAUDE.md`, que lo referencia) es la guía operativa de runtime
   (comandos, stack, "qué no hacer") y debe mantenerse consistente con esta
   constitución; en caso de discrepancia, esta constitución es la fuente de verdad.
+- Los principios de esta constitución usan la numeración `RF-XX`/`RNF-XX` heredada
+  del PRD original (PRD-001). El spec derivado
+  (`specs/001-captura-corte-inventario/spec.md`) renumeró los mismos requisitos como
+  `FR-XXX`/`SC-XXX`; ambas numeraciones coexisten y refieren al mismo requisito de
+  negocio — ver `specs/001-captura-corte-inventario/fr-test-map.md` para la
+  trazabilidad FR→test vigente.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-21 | **Last Amended**: 2026-07-21
+**Version**: 1.0.1 | **Ratified**: 2026-07-21 | **Last Amended**: 2026-07-29
