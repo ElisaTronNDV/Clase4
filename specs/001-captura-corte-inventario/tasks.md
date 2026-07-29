@@ -313,7 +313,7 @@ depender de ninguna orden de trabajo.
 - [X] T065 [P] [US4] Crear schemas pydantic `ProductoCreate`, `ProductoOut` (incluye
   `alerta_stock_bajo`), `ProductoUpdate` en `backend/app/schemas/productos.py` —
   `contracts/productos.md`
-- [ ] T066 [US4] Implementar `POST /api/productos` en `backend/app/api/productos.py` (valida
+- [X] T066 [US4] Implementar `POST /api/productos` en `backend/app/api/productos.py` (valida
   unicidad exacta, FR-026) (depende de T035, T065)
 - [ ] T067 [US4] Implementar `GET /api/productos` en `backend/app/api/productos.py` — FR-028,
   calcula `alerta_stock_bajo` por producto (`stock_fisico - stock_comprometido <= punto_pedido`,
