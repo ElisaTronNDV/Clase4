@@ -27,16 +27,27 @@ export class EscanearOrdenComponent {
     codigoNest: ['', [Validators.required]],
   });
 
-  escaneando = true;
+  modalCamaraAbierto = false;
   buscando = false;
   errorMessage: string | null = null;
 
+  abrirModalCamara(): void {
+    this.errorMessage = null;
+    this.modalCamaraAbierto = true;
+  }
+
+  cerrarModalCamara(): void {
+    this.modalCamaraAbierto = false;
+  }
+
   onScanSuccess(codigoNest: string): void {
-    this.escaneando = false;
+    this.cerrarModalCamara();
+    this.form.patchValue({ codigoNest });
     this.buscar(codigoNest);
   }
 
   onScanError(): void {
+    this.cerrarModalCamara();
     this.errorMessage = 'No se pudo acceder a la cámara. Ingresá el código NEST manualmente.';
   }
 

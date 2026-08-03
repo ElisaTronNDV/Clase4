@@ -1,33 +1,62 @@
 <div class="container py-4" style="max-width: 480px;">
   <h1 class="h4 mb-3">Buscar orden de trabajo</h1>
 
-  <div class="mb-4" *ngIf="escaneando">
-    <zxing-scanner
-      [formats]="formatosPermitidos"
-      (scanSuccess)="onScanSuccess($event)"
-      (scanError)="onScanError()"
-      (camerasNotFound)="onScanError()"
-    ></zxing-scanner>
-    <p class="text-muted small mt-2">Apuntá la cámara al código de barras del NEST.</p>
-  </div>
-
-  <hr />
-
   <form [formGroup]="form" (ngSubmit)="buscarManual()">
-    <label for="codigoNest" class="form-label">Ingresar código NEST manualmente</label>
-    <div class="input-group">
-      <input
-        id="codigoNest"
-        type="text"
-        class="form-control"
-        formControlName="codigoNest"
-        placeholder="NEST-000001"
-      />
+    <label for="codigoNest" class="form-label">Código NEST</label>
+    <input
+      id="codigoNest"
+      type="text"
+      class="form-control mb-2"
+      formControlName="codigoNest"
+      placeholder="NEST-000001"
+    />
+    <div class="d-flex gap-2">
       <button type="submit" class="btn btn-primary" [disabled]="form.invalid || buscando">
         {{ buscando ? 'Buscando…' : 'Buscar' }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        aria-label="Escanear código de barras con la cámara"
+        (click)="abrirModalCamara()"
+      >
+        Escanear
       </button>
     </div>
   </form>
 
   <div class="alert alert-danger mt-3" *ngIf="errorMessage">{{ errorMessage }}</div>
 </div>
+
+<div
+  class="modal d-block"
+  tabindex="-1"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modalCamaraTitulo"
+  *ngIf="modalCamaraAbierto"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalCamaraTitulo">Escanear código NEST</h2>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Cerrar"
+          (click)="cerrarModalCamara()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <zxing-scanner
+          [formats]="formatosPermitidos"
+          (scanSuccess)="onScanSuccess($event)"
+          (scanError)="onScanError()"
+          (camerasNotFound)="onScanError()"
+        ></zxing-scanner>
+        <p class="text-muted small mt-2">Apuntá la cámara al código de barras del NEST.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop d-block" *ngIf="modalCamaraAbierto"></div>
