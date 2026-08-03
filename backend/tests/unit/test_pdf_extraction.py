@@ -20,8 +20,10 @@ def _pdf_en_blanco() -> bytes:
 def test_extraer_propuesta_tablas_completas_sin_recortes():
     from app.services.pdf_extraction import extraer_propuesta
 
-    propuesta = extraer_propuesta(_pdf_bytes("Ejemplo 1.pdf"))
+    propuestas = extraer_propuesta(_pdf_bytes("Ejemplo 1.pdf"))
 
+    assert len(propuestas) == 1
+    propuesta = propuestas[0]
     assert propuesta["extraccion_incompleta"] is False
     assert propuesta["multiplicidad"] == 1
     assert propuesta["espesor_mm"] == pytest.approx(12.7)
@@ -41,8 +43,10 @@ def test_extraer_propuesta_tablas_completas_sin_recortes():
 def test_extraer_propuesta_tablas_completas_con_recortes():
     from app.services.pdf_extraction import extraer_propuesta
 
-    propuesta = extraer_propuesta(_pdf_bytes("Ejemplo 3.pdf"))
+    propuestas = extraer_propuesta(_pdf_bytes("Ejemplo 3.pdf"))
 
+    assert len(propuestas) == 1
+    propuesta = propuestas[0]
     assert propuesta["extraccion_incompleta"] is False
     assert propuesta["multiplicidad"] == 1
     assert propuesta["espesor_mm"] == pytest.approx(8.0)
@@ -60,11 +64,35 @@ def test_extraer_propuesta_tablas_completas_con_recortes():
     ]
 
 
+def test_extraer_propuesta_pdf_con_varias_paginas_devuelve_una_propuesta_por_pagina():
+    from app.services.pdf_extraction import extraer_propuesta
+
+    propuestas = extraer_propuesta(_pdf_bytes("Ejemplo 2.pdf"))
+
+    assert len(propuestas) == 3
+    assert [p["tiempo_ejecucion_estimado"] for p in propuestas] == [
+        "00:01:44",
+        "00:02:29",
+        "00:02:13",
+    ]
+    assert [len(p["piezas"]) for p in propuestas] == [6, 5, 5]
+    for propuesta in propuestas:
+        assert propuesta["extraccion_incompleta"] is False
+        assert propuesta["multiplicidad"] == 1
+        assert propuesta["espesor_mm"] == pytest.approx(0.91)
+        assert propuesta["material"] == "SAE_1010"
+        assert propuesta["largo_mm"] == pytest.approx(3000.0)
+        assert propuesta["ancho_mm"] == pytest.approx(1500.0)
+        assert propuesta["recortes"] == []
+
+
 def test_extraer_propuesta_tabla_faltante_no_bloquea():
     from app.services.pdf_extraction import extraer_propuesta
 
-    propuesta = extraer_propuesta(_pdf_en_blanco())
+    propuestas = extraer_propuesta(_pdf_en_blanco())
 
+    assert len(propuestas) == 1
+    propuesta = propuestas[0]
     assert propuesta["extraccion_incompleta"] is True
     assert propuesta["multiplicidad"] is None
     assert propuesta["espesor_mm"] is None

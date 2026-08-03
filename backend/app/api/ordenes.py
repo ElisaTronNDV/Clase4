@@ -38,11 +38,11 @@ def _obtener_margen_tolerancia_mm(db: Session) -> float:
     return configuracion.margen_tolerancia_mm if configuracion else MARGEN_TOLERANCIA_DEFAULT_MM
 
 
-@router.post("/extraer-pdf", response_model=PropuestaExtraccion)
+@router.post("/extraer-pdf", response_model=list[PropuestaExtraccion])
 async def extraer_pdf(
     archivo: UploadFile,
     usuario=Depends(get_current_user),
-) -> PropuestaExtraccion:
+) -> list[PropuestaExtraccion]:
     contenido = await archivo.read()
     if len(contenido) > TAMANO_MAXIMO_BYTES:
         raise HTTPException(
@@ -54,8 +54,8 @@ async def extraer_pdf(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="El archivo debe ser un PDF válido",
         )
-    propuesta = extraer_propuesta(contenido)
-    return PropuestaExtraccion(**propuesta)
+    propuestas = extraer_propuesta(contenido)
+    return [PropuestaExtraccion(**propuesta) for propuesta in propuestas]
 
 
 @router.post("", response_model=OrdenOut, status_code=status.HTTP_201_CREATED)

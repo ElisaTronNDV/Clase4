@@ -51,13 +51,7 @@ def _extraer_piezas_y_recortes(texto: str) -> tuple[list[dict], list[dict], bool
     return piezas, recortes, False
 
 
-def extraer_propuesta(pdf_bytes: bytes) -> dict:
-    """Extrae una propuesta editable del archivo de corte (FR-008, FR-009). Nunca lanza
-    por estructura inesperada: campos no encontrados quedan en None y
-    extraccion_incompleta pasa a True (edge case del spec, nunca bloquea la carga)."""
-    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-        texto = pdf.pages[0].extract_text() or ""
-
+def _extraer_propuesta_pagina(texto: str) -> dict:
     multiplicidad = _campo(texto, "Multiplicidad", r"(\d+)")
     espesor = _campo(texto, "Espesor [mm]", r"([\d.,]+)")
     material = _campo(texto, "Material", r"(\S+)")
@@ -87,3 +81,13 @@ def extraer_propuesta(pdf_bytes: bytes) -> dict:
         "recortes": recortes,
         "extraccion_incompleta": extraccion_incompleta,
     }
+
+
+def extraer_propuesta(pdf_bytes: bytes) -> list[dict]:
+    """Extrae una propuesta editable por cada página del archivo de corte (FR-008, FR-009).
+    Un mismo PDF puede traer más de un nest (una página por orden): se devuelve una
+    propuesta por página en vez de asumir que el archivo tiene una sola orden. Nunca lanza
+    por estructura inesperada: campos no encontrados quedan en None y extraccion_incompleta
+    pasa a True (edge case del spec, nunca bloquea la carga)."""
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        return [_extraer_propuesta_pagina(page.extract_text() or "") for page in pdf.pages]

@@ -55,7 +55,9 @@ def test_flujo_completo_subir_pdf_editar_confirmar_nest_y_stock(client, auth_hea
         files={"archivo": ("Ejemplo 3.pdf", _pdf_bytes("Ejemplo 3.pdf"), "application/pdf")},
     )
     assert resp_extraer.status_code == 200
-    propuesta = resp_extraer.json()
+    propuestas = resp_extraer.json()
+    assert len(propuestas) == 1
+    propuesta = propuestas[0]
     assert propuesta["extraccion_incompleta"] is False
     assert propuesta["material"] == "SAE_1010"
     assert len(propuesta["piezas"]) == 2

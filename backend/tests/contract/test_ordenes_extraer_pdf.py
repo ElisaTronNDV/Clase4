@@ -28,6 +28,8 @@ def test_extraer_pdf_completo_200(client, auth_headers, db_session):
     )
     assert resp.status_code == 200
     body = resp.json()
+    assert len(body) == 1
+    propuesta = body[0]
     for campo in (
         "multiplicidad",
         "espesor_mm",
@@ -39,12 +41,12 @@ def test_extraer_pdf_completo_200(client, auth_headers, db_session):
         "recortes",
         "extraccion_incompleta",
     ):
-        assert campo in body
-    assert body["material"] == "SAE_1010"
-    assert body["multiplicidad"] == 1
-    assert body["extraccion_incompleta"] is False
-    assert len(body["piezas"]) >= 1
-    assert len(body["recortes"]) == 2
+        assert campo in propuesta
+    assert propuesta["material"] == "SAE_1010"
+    assert propuesta["multiplicidad"] == 1
+    assert propuesta["extraccion_incompleta"] is False
+    assert len(propuesta["piezas"]) >= 1
+    assert len(propuesta["recortes"]) == 2
     assert _sin_filas_persistidas(db_session)
 
 
@@ -56,10 +58,28 @@ def test_extraer_pdf_con_recortes_parsea_dimensiones(client, auth_headers, db_se
         files={"archivo": ("Ejemplo 3.pdf", archivo, "application/pdf")},
     )
     assert resp.status_code == 200
-    recortes = resp.json()["recortes"]
+    recortes = resp.json()[0]["recortes"]
     dimensiones = {(r["largo_mm"], r["ancho_mm"]) for r in recortes}
     assert (1085.0, 1500.0) in dimensiones
     assert (955.0, 559.16) in dimensiones
+    assert _sin_filas_persistidas(db_session)
+
+
+def test_extraer_pdf_con_varias_paginas_devuelve_una_propuesta_por_pagina(
+    client, auth_headers, db_session
+):
+    archivo = _pdf_bytes("Ejemplo 2.pdf")
+    resp = client.post(
+        "/api/ordenes/extraer-pdf",
+        headers=auth_headers,
+        files={"archivo": ("Ejemplo 2.pdf", archivo, "application/pdf")},
+    )
+    assert resp.status_code == 200
+    body = resp.json()
+    assert len(body) == 3
+    for propuesta in body:
+        assert propuesta["extraccion_incompleta"] is False
+        assert propuesta["material"] == "SAE_1010"
     assert _sin_filas_persistidas(db_session)
 
 
@@ -99,9 +119,11 @@ def test_extraer_pdf_tabla_faltante_extraccion_incompleta(client, auth_headers, 
     )
     assert resp.status_code == 200
     body = resp.json()
-    assert body["extraccion_incompleta"] is True
-    assert body["piezas"] == []
-    assert body["recortes"] == []
+    assert len(body) == 1
+    propuesta = body[0]
+    assert propuesta["extraccion_incompleta"] is True
+    assert propuesta["piezas"] == []
+    assert propuesta["recortes"] == []
     assert _sin_filas_persistidas(db_session)
 
 

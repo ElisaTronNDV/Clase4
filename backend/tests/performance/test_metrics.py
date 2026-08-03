@@ -32,7 +32,8 @@ GROUND_TRUTH = {
         "recortes": [],
     },
     "Ejemplo 2.pdf": {
-        # Página 1/3 del nest (primer formato) — es la que procesa el extractor.
+        # Ground truth de la página 1/3 del nest (primer formato); el extractor devuelve
+        # una propuesta por página, acá solo se mide accuracy sobre la primera.
         "generales": {
             "multiplicidad": 1,
             "espesor_mm": 0.91,
@@ -117,7 +118,7 @@ def test_sc001_accuracy_extraccion_por_campo_individual_al_menos_98_por_ciento()
 
     for nombre, ground_truth in GROUND_TRUTH.items():
         contenido = (FIXTURES_DIR / nombre).read_bytes()
-        propuesta = extraer_propuesta(contenido)
+        propuesta = extraer_propuesta(contenido)[0]
         correctos, total = _contar_campos(ground_truth, propuesta)
         accuracy_doc = correctos / total
         print(f"{nombre}: {correctos}/{total} campos correctos ({accuracy_doc:.1%})")
