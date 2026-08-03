@@ -33,7 +33,6 @@
           [value]="producto.stock_comprometido"
           disabled
         />
-        <div class="form-text">No editable: se actualiza automáticamente con las órdenes.</div>
       </div>
       <div class="col-md-4 mb-3">
         <label for="punto_pedido" class="form-label">Punto de pedido</label>
@@ -41,7 +40,9 @@
       </div>
     </div>
     <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar cambios</button>
-    <a routerLink="/inventario/listado" class="btn btn-link">Cancelar</a>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
+      <a routerLink="/inventario/listado" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
   </form>
 </div>

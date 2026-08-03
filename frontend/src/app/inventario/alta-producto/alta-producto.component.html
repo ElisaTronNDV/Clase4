@@ -30,7 +30,9 @@
       </div>
     </div>
     <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Dar de alta</button>
-    <a routerLink="/inventario/listado" class="btn btn-link">Cancelar</a>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
+      <a routerLink="/inventario/listado" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
   </form>
 </div>

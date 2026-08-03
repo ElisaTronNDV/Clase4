@@ -35,7 +35,7 @@ export class LoginComponent {
     this.api.post<Token>('/api/auth/login', credenciales).subscribe({
       next: (token) => {
         this.tokenService.setToken(token.access_token);
-        this.router.navigate(['/oficina']);
+        this.router.navigate(['/home']);
       },
       error: () => {
         this.errorMessage = 'Email o contraseña inválidos.';

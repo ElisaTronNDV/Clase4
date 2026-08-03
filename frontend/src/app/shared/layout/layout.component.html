@@ -1,0 +1,96 @@
+<div class="d-flex" style="min-height: 100vh;">
+  <nav
+    class="d-flex flex-column flex-shrink-0 p-3 bg-secondary d-print-none"
+    data-bs-theme="dark"
+    style="width: 280px;"
+  >
+    <span class="fs-5 fw-semibold mb-3">
+      <span class="text-primary">DyP</span>&nbsp;<span class="text-white">LaserCore</span>
+    </span>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link link-body-emphasis w-100 text-start border-0 bg-transparent d-flex justify-content-between align-items-center"
+          [attr.aria-expanded]="inventarioAbierto"
+          aria-controls="submenuInventario"
+          (click)="inventarioAbierto = !inventarioAbierto"
+        >
+          Inventario
+          <span aria-hidden="true">{{ inventarioAbierto ? '▾' : '▸' }}</span>
+        </button>
+        <ul class="nav flex-column ms-3" id="submenuInventario" *ngIf="inventarioAbierto">
+          <li class="nav-item">
+            <a
+              routerLink="/inventario/listado"
+              routerLinkActive="active"
+              class="nav-link link-body-emphasis"
+            >
+              Productos
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link link-body-emphasis w-100 text-start border-0 bg-transparent d-flex justify-content-between align-items-center"
+          [attr.aria-expanded]="oficinaAbierto"
+          aria-controls="submenuOficina"
+          (click)="oficinaAbierto = !oficinaAbierto"
+        >
+          Oficina
+          <span aria-hidden="true">{{ oficinaAbierto ? '▾' : '▸' }}</span>
+        </button>
+        <ul class="nav flex-column ms-3" id="submenuOficina" *ngIf="oficinaAbierto">
+          <li class="nav-item">
+            <a
+              routerLink="/oficina/listado"
+              routerLinkActive="active"
+              class="nav-link link-body-emphasis"
+            >
+              Órdenes de trabajo
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <button
+          type="button"
+          class="nav-link link-body-emphasis w-100 text-start border-0 bg-transparent d-flex justify-content-between align-items-center"
+          [attr.aria-expanded]="tallerAbierto"
+          aria-controls="submenuTaller"
+          (click)="tallerAbierto = !tallerAbierto"
+        >
+          Taller
+          <span aria-hidden="true">{{ tallerAbierto ? '▾' : '▸' }}</span>
+        </button>
+        <ul class="nav flex-column ms-3" id="submenuTaller" *ngIf="tallerAbierto">
+          <li class="nav-item">
+            <a
+              routerLink="/taller/escanear"
+              routerLinkActive="active"
+              class="nav-link link-body-emphasis"
+            >
+              Finalizar orden de trabajo
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/configuracion"
+          routerLinkActive="active"
+          class="nav-link link-body-emphasis"
+        >
+          Configuraciones del sistema
+        </a>
+      </li>
+    </ul>
+    <hr />
+    <a routerLink="/logout" class="nav-link link-body-emphasis">Cerrar sesión</a>
+  </nav>
+  <main class="flex-grow-1 bg-white">
+    <router-outlet />
+  </main>
+</div>

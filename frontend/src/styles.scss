@@ -1,1 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
+// Colores de marca DyP LaserCore.
+// Se definen antes del import de Bootstrap para que todos los componentes
+// (botones, links, nav-pills, focus ring, etc.) se recalculen con la marca.
+$primary: #ee332b;
+$secondary: #3d3e3e;
+
+@import "bootstrap/scss/bootstrap";
+
+:root {
+  --primary-color: #{$primary};
+  --secondary-color: #{$secondary};
+}
+
+body {
+  background-color: #fff;
+}
+
+// Bootstrap calcula automáticamente #000 como color de texto sobre $primary
+// (el contraste con blanco queda apenas debajo del mínimo por defecto), pero
+// para un CTA en rojo de marca el texto blanco es el estándar esperado.
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: #fff;
+}
+
+.btn-outline-primary {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #1c1c1c 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 0.75rem;
+  border-top: 4px solid var(--primary-color);
+  padding: 2.5rem 2rem 2rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25);
+}
+
+.auth-card__brand {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 1.75rem;
+}
+
+.auth-card__brand-mark {
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--primary-color);
+}
+
+.auth-card__brand-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+}
