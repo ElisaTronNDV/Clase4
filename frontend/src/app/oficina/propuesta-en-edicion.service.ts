@@ -4,17 +4,17 @@ import { PropuestaExtraccion } from '../shared/models/ordenes.models';
 
 @Injectable({ providedIn: 'root' })
 export class PropuestaEnEdicionService {
-  private readonly propuesta = signal<PropuestaExtraccion | null>(null);
+  private readonly propuestas = signal<PropuestaExtraccion[] | null>(null);
 
-  set(propuesta: PropuestaExtraccion): void {
-    this.propuesta.set(propuesta);
+  set(propuestas: PropuestaExtraccion[]): void {
+    this.propuestas.set(propuestas);
   }
 
-  get(): PropuestaExtraccion | null {
-    return this.propuesta();
+  get(): PropuestaExtraccion[] | null {
+    return this.propuestas();
   }
 
   clear(): void {
-    this.propuesta.set(null);
+    this.propuestas.set(null);
   }
 }

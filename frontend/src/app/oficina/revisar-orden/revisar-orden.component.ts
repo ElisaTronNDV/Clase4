@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ApiService } from '../../shared/services/api.service';
 import { OrdenOut } from '../../shared/models/ordenes.models';
-import { OrdenConfirmadaService } from '../orden-confirmada.service';
+import { OrdenConfirmadaService, OrdenParaImprimir } from '../orden-confirmada.service';
 import { PropuestaEnEdicionService } from '../propuesta-en-edicion.service';
+
+interface EstadoOrden {
+  error: string | null;
+  advertencia: boolean;
+}
 
 @Component({
   selector: 'app-revisar-orden',
@@ -21,113 +26,183 @@ export class RevisarOrdenComponent implements OnInit {
   private readonly ordenConfirmada = inject(OrdenConfirmadaService);
   private readonly router = inject(Router);
 
-  form = this.fb.group({
-    multiplicidad: [1, [Validators.required, Validators.min(1)]],
-    espesor_mm: [0, [Validators.required, Validators.min(0.01)]],
-    material: ['', [Validators.required]],
-    largo_mm: [0, [Validators.required, Validators.min(0.01)]],
-    ancho_mm: [0, [Validators.required, Validators.min(0.01)]],
-    tiempo_ejecucion_estimado: ['', [Validators.required]],
-    piezas: this.fb.array([]),
-    recortes: this.fb.array([]),
-  });
-
-  errorMessage: string | null = null;
-  advertenciaProductoInexistente = false;
+  ordenesForm = this.fb.array<FormGroup>([]);
+  estados: EstadoOrden[] = [];
+  confirmadas: boolean[] = [];
+  tabActiva = 0;
   enviando = false;
 
-  get piezas(): FormArray {
-    return this.form.get('piezas') as FormArray;
-  }
-
-  get recortes(): FormArray {
-    return this.form.get('recortes') as FormArray;
-  }
+  private ordenesConfirmadas: OrdenParaImprimir[] = [];
 
   ngOnInit(): void {
-    const propuesta = this.propuestaEnEdicion.get();
-    if (!propuesta) {
+    const propuestas = this.propuestaEnEdicion.get();
+    if (!propuestas || propuestas.length === 0) {
       this.router.navigate(['/oficina/subir']);
       return;
     }
 
-    this.form.patchValue({
-      multiplicidad: propuesta.multiplicidad ?? 1,
-      espesor_mm: propuesta.espesor_mm ?? 0,
-      material: propuesta.material ?? '',
-      largo_mm: propuesta.largo_mm ?? 0,
-      ancho_mm: propuesta.ancho_mm ?? 0,
-      tiempo_ejecucion_estimado: propuesta.tiempo_ejecucion_estimado ?? '',
+    propuestas.forEach((propuesta) => {
+      const grupo = this.crearGrupoOrden();
+      grupo.patchValue({
+        multiplicidad: propuesta.multiplicidad ?? 1,
+        espesor_mm: propuesta.espesor_mm ?? 0,
+        material: propuesta.material ?? '',
+        largo_mm: propuesta.largo_mm ?? 0,
+        ancho_mm: propuesta.ancho_mm ?? 0,
+        tiempo_ejecucion_estimado: propuesta.tiempo_ejecucion_estimado ?? '',
+      });
+
+      const piezas = grupo.get('piezas') as FormArray;
+      propuesta.piezas.forEach((pieza) =>
+        piezas.push(this.crearControlPieza(pieza.descripcion, pieza.cantidad))
+      );
+
+      const recortes = grupo.get('recortes') as FormArray;
+      propuesta.recortes.forEach((recorte) =>
+        recortes.push(this.crearControlRecorte(recorte.largo_mm, recorte.ancho_mm))
+      );
+
+      this.ordenesForm.push(grupo);
+      this.estados.push({ error: null, advertencia: false });
+      this.confirmadas.push(false);
     });
-
-    propuesta.piezas.forEach((pieza) => this.agregarPieza(pieza.descripcion, pieza.cantidad));
-    propuesta.recortes.forEach((recorte) =>
-      this.agregarRecorte(recorte.largo_mm, recorte.ancho_mm)
-    );
   }
 
-  agregarPieza(descripcion = '', cantidad = 1): void {
-    this.piezas.push(
-      this.fb.group({
-        descripcion: [descripcion, Validators.required],
-        cantidad: [cantidad, [Validators.required, Validators.min(1)]],
-      })
-    );
+  grupoDe(indice: number): FormGroup {
+    return this.ordenesForm.at(indice) as FormGroup;
   }
 
-  eliminarPieza(index: number): void {
-    this.piezas.removeAt(index);
+  piezasDe(indice: number): FormArray {
+    return this.grupoDe(indice).get('piezas') as FormArray;
   }
 
-  agregarRecorte(largo: number | null = null, ancho: number | null = null): void {
-    this.recortes.push(
-      this.fb.group({
-        largo_mm: [largo, [Validators.required, Validators.min(0.01)]],
-        ancho_mm: [ancho, [Validators.required, Validators.min(0.01)]],
-      })
-    );
+  recortesDe(indice: number): FormArray {
+    return this.grupoDe(indice).get('recortes') as FormArray;
   }
 
-  eliminarRecorte(index: number): void {
-    this.recortes.removeAt(index);
+  agregarPieza(indice: number): void {
+    this.piezasDe(indice).push(this.crearControlPieza());
   }
 
-  confirmar(confirmarCreacionAutomatica = false): void {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+  eliminarPieza(indice: number, indicePieza: number): void {
+    this.piezasDe(indice).removeAt(indicePieza);
+  }
+
+  agregarRecorte(indice: number): void {
+    this.recortesDe(indice).push(this.crearControlRecorte());
+  }
+
+  eliminarRecorte(indice: number, indiceRecorte: number): void {
+    this.recortesDe(indice).removeAt(indiceRecorte);
+  }
+
+  cancelar(): void {
+    this.propuestaEnEdicion.clear();
+    this.router.navigate(['/oficina/subir']);
+  }
+
+  confirmarTodas(): void {
+    this.ordenesConfirmadas = [];
+    this.confirmarDesde(0);
+  }
+
+  confirmarConCreacionAutomatica(indice: number): void {
+    this.enviarOrden(indice, true);
+  }
+
+  private confirmarDesde(indice: number): void {
+    if (indice >= this.ordenesForm.length) {
+      this.propuestaEnEdicion.clear();
+      if (this.ordenesConfirmadas.length === 1) {
+        const [orden] = this.ordenesConfirmadas;
+        this.ordenConfirmada.set(orden);
+        this.router.navigate(['/oficina/impresion', orden.codigo_nest]);
+      } else {
+        this.router.navigate(['/oficina/listado']);
+      }
       return;
     }
-    this.enviando = true;
-    this.errorMessage = null;
-    this.advertenciaProductoInexistente = false;
 
+    this.tabActiva = indice;
+    const grupo = this.grupoDe(indice);
+    if (grupo.invalid) {
+      grupo.markAllAsTouched();
+      return;
+    }
+
+    this.enviarOrden(indice, false);
+  }
+
+  private enviarOrden(indice: number, confirmarCreacionAutomatica: boolean): void {
+    this.tabActiva = indice;
+    this.enviando = true;
+    this.estados[indice] = { error: null, advertencia: false };
+
+    const grupo = this.grupoDe(indice);
     const payload = {
-      ...this.form.getRawValue(),
+      ...grupo.getRawValue(),
       confirmar_creacion_automatica: confirmarCreacionAutomatica,
     };
 
     this.api.post<OrdenOut>('/api/ordenes', payload).subscribe({
       next: (orden) => {
         this.enviando = false;
-        this.ordenConfirmada.set({
+        this.confirmadas[indice] = true;
+        const { material, espesor_mm, largo_mm, ancho_mm } = grupo.getRawValue();
+        this.ordenesConfirmadas.push({
           id: orden.id,
           codigo_nest: orden.codigo_nest,
-          piezas: this.piezas.getRawValue(),
+          material: material ?? '',
+          espesor_mm: espesor_mm ?? 0,
+          largo_mm: largo_mm ?? 0,
+          ancho_mm: ancho_mm ?? 0,
+          piezas: this.piezasDe(indice).getRawValue(),
         });
-        this.propuestaEnEdicion.clear();
-        this.router.navigate(['/oficina/impresion', orden.id]);
+        this.confirmarDesde(indice + 1);
       },
       error: (err) => {
         this.enviando = false;
         if (err.status === 404 && err.error?.detail?.advertencia_producto_inexistente) {
-          this.advertenciaProductoInexistente = true;
-          this.errorMessage = err.error.detail.mensaje ?? 'No existe un producto coincidente.';
+          this.estados[indice] = {
+            advertencia: true,
+            error: err.error.detail.mensaje ?? 'No existe un producto coincidente.',
+          };
         } else if (err.status === 422) {
-          this.errorMessage = 'Revisá los datos: hay campos incompletos o inválidos.';
+          this.estados[indice] = {
+            advertencia: false,
+            error: 'Revisá los datos: hay campos incompletos o inválidos.',
+          };
         } else {
-          this.errorMessage = 'No se pudo confirmar la orden.';
+          this.estados[indice] = { advertencia: false, error: 'No se pudo confirmar la orden.' };
         }
       },
+    });
+  }
+
+  private crearGrupoOrden(): FormGroup {
+    return this.fb.group({
+      multiplicidad: [1, [Validators.required, Validators.min(1)]],
+      espesor_mm: [0, [Validators.required, Validators.min(0.01)]],
+      material: ['', [Validators.required]],
+      largo_mm: [0, [Validators.required, Validators.min(0.01)]],
+      ancho_mm: [0, [Validators.required, Validators.min(0.01)]],
+      tiempo_ejecucion_estimado: ['', [Validators.required]],
+      piezas: this.fb.array([]),
+      recortes: this.fb.array([]),
+    });
+  }
+
+  private crearControlPieza(descripcion = '', cantidad = 1): FormGroup {
+    return this.fb.group({
+      descripcion: [descripcion, Validators.required],
+      cantidad: [cantidad, [Validators.required, Validators.min(1)]],
+    });
+  }
+
+  private crearControlRecorte(largo: number | null = null, ancho: number | null = null): FormGroup {
+    return this.fb.group({
+      largo_mm: [largo, [Validators.required, Validators.min(0.01)]],
+      ancho_mm: [ancho, [Validators.required, Validators.min(0.01)]],
     });
   }
 }

@@ -12,18 +12,20 @@
       type="file"
       accept="application/pdf"
       class="form-control"
+      [disabled]="enviando"
       (change)="onArchivoSeleccionado($event)"
     />
   </div>
 
   <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-  <button
-    type="button"
-    class="btn btn-primary"
-    [disabled]="!archivoSeleccionado || enviando"
-    (click)="subir()"
-  >
-    {{ enviando ? 'Procesando…' : 'Subir y extraer datos' }}
-  </button>
+  <div *ngIf="enviando" class="d-flex align-items-center gap-3">
+    <p class="text-muted m-0">
+      <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+      Procesando…
+    </p>
+    <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
 </div>

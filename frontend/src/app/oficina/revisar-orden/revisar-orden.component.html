@@ -1,155 +1,220 @@
 <div class="container py-4" style="max-width: 720px;">
   <h1 class="h4 mb-3">Revisar orden de trabajo</h1>
-  <p class="text-muted">
+  <p class="text-muted" *ngIf="ordenesForm.length <= 1">
     Estos son los datos extraídos del archivo de corte. Revisalos y corregí lo que haga falta
     antes de confirmar: nada se guarda hasta que confirmes.
   </p>
+  <p class="text-muted" *ngIf="ordenesForm.length > 1">
+    El archivo de corte trae {{ ordenesForm.length }} órdenes (una por página). Revisá cada una
+    en su pestaña y corregí lo que haga falta antes de confirmar: nada se guarda hasta que
+    confirmes.
+  </p>
 
-  <form [formGroup]="form" (ngSubmit)="confirmar(false)">
-    <fieldset class="mb-4">
-      <legend class="h6">Datos generales</legend>
-      <div class="row g-3">
-        <div class="col-md-4">
-          <label for="multiplicidad" class="form-label">Multiplicidad</label>
-          <input id="multiplicidad" type="number" class="form-control" formControlName="multiplicidad" />
-        </div>
-        <div class="col-md-4">
-          <label for="espesorMm" class="form-label">Espesor [mm]</label>
-          <input id="espesorMm" type="number" step="0.01" class="form-control" formControlName="espesor_mm" />
-        </div>
-        <div class="col-md-4">
-          <label for="material" class="form-label">Material</label>
-          <input id="material" type="text" class="form-control" formControlName="material" />
-        </div>
-        <div class="col-md-4">
-          <label for="largoMm" class="form-label">Largo [mm]</label>
-          <input id="largoMm" type="number" step="0.01" class="form-control" formControlName="largo_mm" />
-        </div>
-        <div class="col-md-4">
-          <label for="anchoMm" class="form-label">Ancho [mm]</label>
-          <input id="anchoMm" type="number" step="0.01" class="form-control" formControlName="ancho_mm" />
-        </div>
-        <div class="col-md-4">
-          <label for="tiempoEjecucion" class="form-label">Tiempo de ejecución estimado</label>
-          <input
-            id="tiempoEjecucion"
-            type="text"
-            class="form-control"
-            formControlName="tiempo_ejecucion_estimado"
-            placeholder="hh:mm:ss"
-          />
-        </div>
-      </div>
-    </fieldset>
+  <ul class="nav nav-tabs mb-4" *ngIf="ordenesForm.length > 1">
+    <li class="nav-item" *ngFor="let grupo of ordenesForm.controls; let i = index">
+      <button
+        type="button"
+        class="nav-link"
+        [class.active]="tabActiva === i"
+        (click)="tabActiva = i"
+      >
+        Orden {{ i + 1 }}
+        <span *ngIf="confirmadas[i]" class="text-success" aria-label="Confirmada">✓</span>
+        <span *ngIf="estados[i].error" class="text-danger" aria-label="Con errores">⚠</span>
+      </button>
+    </li>
+  </ul>
 
-    <fieldset class="mb-4">
-      <legend class="h6">Piezas</legend>
-      <div formArrayName="piezas">
-        <div
-          class="row g-2 align-items-center mb-2"
-          *ngFor="let pieza of piezas.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <div class="col-7">
+  <div *ngFor="let grupo of ordenesForm.controls; let i = index" [hidden]="tabActiva !== i">
+    <div [formGroup]="grupoDe(i)">
+      <fieldset class="mb-4">
+        <legend class="h6">Datos generales</legend>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label [for]="'multiplicidad-' + i" class="form-label">Multiplicidad</label>
             <input
-              type="text"
-              class="form-control"
-              formControlName="descripcion"
-              placeholder="Descripción"
-              [attr.aria-label]="'Descripción de la pieza ' + (i + 1)"
-            />
-          </div>
-          <div class="col-3">
-            <input
+              [id]="'multiplicidad-' + i"
               type="number"
               class="form-control"
-              formControlName="cantidad"
-              placeholder="Cantidad"
-              [attr.aria-label]="'Cantidad de la pieza ' + (i + 1)"
+              formControlName="multiplicidad"
             />
           </div>
-          <div class="col-2">
-            <button
-              type="button"
-              class="btn btn-outline-danger btn-sm"
-              [attr.aria-label]="'Quitar pieza ' + (i + 1)"
-              (click)="eliminarPieza(i)"
-            >
-              Quitar
-            </button>
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="agregarPieza()">
-        Agregar pieza
-      </button>
-    </fieldset>
-
-    <fieldset class="mb-4">
-      <legend class="h6">Recortes sobrantes</legend>
-      <div formArrayName="recortes">
-        <div
-          class="row g-2 align-items-center mb-2"
-          *ngFor="let recorte of recortes.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <div class="col-5">
+          <div class="col-md-4">
+            <label [for]="'espesorMm-' + i" class="form-label">Espesor [mm]</label>
             <input
+              [id]="'espesorMm-' + i"
+              type="number"
+              step="0.01"
+              class="form-control"
+              formControlName="espesor_mm"
+            />
+          </div>
+          <div class="col-md-4">
+            <label [for]="'material-' + i" class="form-label">Material</label>
+            <input
+              [id]="'material-' + i"
+              type="text"
+              class="form-control"
+              formControlName="material"
+            />
+          </div>
+          <div class="col-md-4">
+            <label [for]="'largoMm-' + i" class="form-label">Largo [mm]</label>
+            <input
+              [id]="'largoMm-' + i"
               type="number"
               step="0.01"
               class="form-control"
               formControlName="largo_mm"
-              placeholder="Largo [mm]"
-              [attr.aria-label]="'Largo en mm del recorte ' + (i + 1)"
             />
           </div>
-          <div class="col-5">
+          <div class="col-md-4">
+            <label [for]="'anchoMm-' + i" class="form-label">Ancho [mm]</label>
             <input
+              [id]="'anchoMm-' + i"
               type="number"
               step="0.01"
               class="form-control"
               formControlName="ancho_mm"
-              placeholder="Ancho [mm]"
-              [attr.aria-label]="'Ancho en mm del recorte ' + (i + 1)"
             />
           </div>
-          <div class="col-2">
-            <button
-              type="button"
-              class="btn btn-outline-danger btn-sm"
-              [attr.aria-label]="'Quitar recorte ' + (i + 1)"
-              (click)="eliminarRecorte(i)"
-            >
-              Quitar
-            </button>
+          <div class="col-md-4">
+            <label [for]="'tiempoEjecucion-' + i" class="form-label">
+              Tiempo de ejecución estimado
+            </label>
+            <input
+              [id]="'tiempoEjecucion-' + i"
+              type="text"
+              class="form-control"
+              formControlName="tiempo_ejecucion_estimado"
+              placeholder="hh:mm:ss"
+            />
           </div>
         </div>
-      </div>
-      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="agregarRecorte()">
-        Agregar recorte
-      </button>
-    </fieldset>
+      </fieldset>
 
-    <div class="alert alert-warning" *ngIf="advertenciaProductoInexistente">
-      {{ errorMessage }}
-      <div class="mt-2">
-        <button
-          type="button"
-          class="btn btn-warning btn-sm"
-          [disabled]="enviando"
-          (click)="confirmar(true)"
-        >
-          Confirmar de todos modos y dar de alta el producto
+      <fieldset class="mb-4">
+        <legend class="h6">Piezas</legend>
+        <div formArrayName="piezas">
+          <div
+            class="row g-2 align-items-center mb-2"
+            *ngFor="let pieza of piezasDe(i).controls; let j = index"
+            [formGroupName]="j"
+          >
+            <div class="col-7">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="descripcion"
+                placeholder="Descripción"
+                [attr.aria-label]="'Descripción de la pieza ' + (j + 1)"
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="cantidad"
+                placeholder="Cantidad"
+                [attr.aria-label]="'Cantidad de la pieza ' + (j + 1)"
+              />
+            </div>
+            <div class="col-2">
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                [attr.aria-label]="'Quitar pieza ' + (j + 1)"
+                (click)="eliminarPieza(i, j)"
+              >
+                Quitar
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="agregarPieza(i)">
+          Agregar pieza
         </button>
+      </fieldset>
+
+      <fieldset class="mb-4">
+        <legend class="h6">Recortes sobrantes</legend>
+        <div formArrayName="recortes">
+          <div
+            class="row g-2 align-items-center mb-2"
+            *ngFor="let recorte of recortesDe(i).controls; let j = index"
+            [formGroupName]="j"
+          >
+            <div class="col-5">
+              <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                formControlName="largo_mm"
+                placeholder="Largo [mm]"
+                [attr.aria-label]="'Largo en mm del recorte ' + (j + 1)"
+              />
+            </div>
+            <div class="col-5">
+              <input
+                type="number"
+                step="0.01"
+                class="form-control"
+                formControlName="ancho_mm"
+                placeholder="Ancho [mm]"
+                [attr.aria-label]="'Ancho en mm del recorte ' + (j + 1)"
+              />
+            </div>
+            <div class="col-2">
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                [attr.aria-label]="'Quitar recorte ' + (j + 1)"
+                (click)="eliminarRecorte(i, j)"
+              >
+                Quitar
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="agregarRecorte(i)">
+          Agregar recorte
+        </button>
+      </fieldset>
+
+      <div class="alert alert-warning" *ngIf="estados[i].advertencia">
+        {{ estados[i].error }}
+        <div class="mt-2">
+          <button
+            type="button"
+            class="btn btn-warning btn-sm"
+            [disabled]="enviando"
+            (click)="confirmarConCreacionAutomatica(i)"
+          >
+            Confirmar de todos modos y dar de alta el producto
+          </button>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="estados[i].error && !estados[i].advertencia">
+        {{ estados[i].error }}
       </div>
     </div>
+  </div>
 
-    <div class="alert alert-danger" *ngIf="errorMessage && !advertenciaProductoInexistente">
-      {{ errorMessage }}
-    </div>
-
-    <button type="submit" class="btn btn-primary" [disabled]="enviando">
-      {{ enviando ? 'Confirmando…' : 'Confirmar orden' }}
+  <div class="d-flex gap-2">
+    <button type="button" class="btn btn-primary" [disabled]="enviando" (click)="confirmarTodas()">
+      <ng-container *ngIf="!enviando">
+        {{ ordenesForm.length > 1 ? 'Confirmar ' + ordenesForm.length + ' órdenes' : 'Confirmar orden' }}
+      </ng-container>
+      <ng-container *ngIf="enviando">Confirmando…</ng-container>
     </button>
-  </form>
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      [disabled]="enviando"
+      (click)="cancelar()"
+    >
+      Cancelar
+    </button>
+  </div>
 </div>
