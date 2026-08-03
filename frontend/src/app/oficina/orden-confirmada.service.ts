@@ -5,6 +5,10 @@ import { Pieza } from '../shared/models/ordenes.models';
 export interface OrdenParaImprimir {
   id: number;
   codigo_nest: string;
+  material: string;
+  espesor_mm: number;
+  largo_mm: number;
+  ancho_mm: number;
   piezas: Pieza[];
 }
 
